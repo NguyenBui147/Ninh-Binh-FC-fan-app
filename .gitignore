@@ -35,6 +35,8 @@ local.properties
 !debug.keystore
 .kotlin/
 
+
+.env*.local
 # node.js
 #
 node_modules/

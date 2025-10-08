@@ -1,0 +1,222 @@
+[
+  {
+    "id": "albadalejo_c_gerard",
+    "name": "Albadalejo C. Gerard",
+    "position": "HLV Trưởng",
+    "number": null,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1983-08-30",
+    "nationality": "Tây Ban Nha"
+  },
+  {
+    "id": "dang_van_lam",
+    "name": "Đặng Văn Lâm",
+    "position": "Thủ môn",
+    "number": 1,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1993-08-13",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "quang_the_tai",
+    "name": "Quàng Thế Tài",
+    "position": "Thủ môn",
+    "number": 25,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1996-09-10",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "patrick_marcelino",
+    "name": "Patrick Marcelino",
+    "position": "Hậu vệ",
+    "number": 3,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1994-03-04",
+    "nationality": "Brazil"
+  },
+  {
+    "id": "do_thanh_thinh",
+    "name": "Đỗ Thanh Thịnh",
+    "position": "Hậu vệ",
+    "number": 6,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1998-08-18",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "arban_guillaume",
+    "name": "Arban E.Alex Guillaume",
+    "position": "Hậu vệ",
+    "number": 12,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2005-06-12",
+    "nationality": "Pháp"
+  },
+  {
+    "id": "le_ngoc_bao",
+    "name": "Lê Ngọc Bảo",
+    "position": "Hậu vệ",
+    "number": 17,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1998-03-29",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "le_hai_duc",
+    "name": "Lê Hải Đức",
+    "position": "Hậu vệ",
+    "number": 26,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-02-24",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "dung_quang_nho",
+    "name": "Dụng Quang Nho",
+    "position": "Hậu vệ",
+    "number": 86,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-01-01",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "nguyen_duc_chien",
+    "name": "Nguyễn Đức Chiến",
+    "position": "Tiền vệ",
+    "number": 7,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1998-08-24",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "tran_thanh_trung",
+    "name": "Trần Thành Trung",
+    "position": "Tiền vệ",
+    "number": 8,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2005-05-23",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "chau_ngoc_quang",
+    "name": "Châu Ngọc Quang",
+    "position": "Tiền vệ",
+    "number": 10,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1996-02-01",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "mach_ngoc_ha",
+    "name": "Mạch Ngọc Hà",
+    "position": "Tiền vệ",
+    "number": 19,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-09-10",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "nguyen_hoang_duc",
+    "name": "Nguyễn Hoàng Đức",
+    "position": "Tiền vệ",
+    "number": 28,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1998-01-11",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "nguyen_trong_long",
+    "name": "Nguyễn Trọng Long",
+    "position": "Tiền vệ",
+    "number": 29,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-01-06",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "luong_ngoc_lam",
+    "name": "Lương T. Ngọc Lâm",
+    "position": "Tiền vệ",
+    "number": 77,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1998-09-20",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "geovane_silveira",
+    "name": "Geovane M.C. Silveira",
+    "position": "Tiền vệ",
+    "number": 94,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1994-04-14",
+    "nationality": "Brazil"
+  },
+  {
+    "id": "tran_bao_toan",
+    "name": "Trần Bảo Toàn",
+    "position": "Tiền đạo",
+    "number": 15,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-07-14",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "pham_gia_hung",
+    "name": "Phạm Gia Hưng",
+    "position": "Tiền đạo",
+    "number": 18,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "2000-04-26",
+    "nationality": "Việt Nam"
+  },
+  {
+    "id": "rodrigues_henrique",
+    "name": "Rodrigues G. Henrique",
+    "position": "Tiền đạo",
+    "number": 68,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1995-11-08",
+    "nationality": "Brazil"
+  },
+  {
+    "id": "daniel_dos_anjos",
+    "name": "Daniel D.S. Dos Anjos",
+    "position": "Tiền đạo",
+    "number": 90,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "1996-01-21",
+    "nationality": "Bồ Đào Nha"
+  },
+  {
+    "id": "nguyen_quoc_viet",
+    "name": "Nguyễn Quốc Việt",
+    "position": "Tiền đạo",
+    "number": 99,
+    "img_url": "",
+    "status": "active",
+    "birthdate": "",
+    "nationality": "Việt Nam"
+  }
+]

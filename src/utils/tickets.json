@@ -1,0 +1,56 @@
+[
+  {
+    "id": "season-pass",
+    "name": "Vé mùa",
+    "price": 800000,
+    "description": "Vé vào cửa tất cả các trận đấu trong mùa giải",
+    "available": true,
+    "quantity": 1000,
+    "category": "trọn mùa"
+  },
+  {
+    "id": "stand-a",
+    "name": "Vé khán đài A",
+    "price": 80000,
+    "description": "Khán đài A, nơi có hội cổ động viên clb bóng đá Ninh Bình,được giao lưu với các cầu thủ, không có mái che",
+    "available": true,
+    "quantity": 2000,
+    "category": "theo trận"
+  },
+  {
+    "id": "stand-b-f1",
+    "name": "Vé khán đài B ,tầng 1,có mái che",
+    "price": 60000,
+    "description": "Khán ",
+    "available": true,
+    "quantity": 3000,
+    "category": "theo trận"
+  },
+  {
+    "id": "stand-b-f2",
+    "name": "Vé khán đài B",
+    "price": 60000,
+    "description": "Vé khán đài B ,tầng 2,có mái che",
+    "available": true,
+    "quantity": 3000,
+    "category": "theo trận"
+  },
+  {
+    "id": "vip-box",
+    "name": "Vé VIP ",
+    "price": 250000,
+    "description": "Ghế riêng, phục vụ đồ ăn nhẹ, view đẹp,có mái che",
+    "available": true,
+    "quantity": 0,
+    "category": "theo trận"
+  },
+  {
+    "id": "membership",
+    "name": "Thẻ hội viên",
+    "price": 1000000,
+    "description": "Trở thành hội viên,với vé khán đài A cả mùa,áo cổ vũ,xe bus cổ vũ và nhiều hoạt động khác",
+    "available": true,
+    "quantity": 0,
+    "category": "theo trận"
+  }
+]

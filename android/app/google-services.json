@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607238329505",
+    "project_id": "nb-fc-db",
+    "storage_bucket": "nb-fc-db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607238329505:android:78517d8ef283838b870ce0",
+        "android_client_info": {
+          "package_name": "com.ninhbinhfc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtvkByzcN28QceTT1DNpZJ2kmxc6txD84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
