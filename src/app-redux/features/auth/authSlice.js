@@ -1,23 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice , createAsyncThunk} from '@reduxjs/toolkit';
+import { uiSlice } from '../features/ui/uiSlice'
+import axios from 'axios';
+import { auth } from '../../../firebase/firebase'; 
+
 
 const initialState = {
   user: null,
   isAuthReady: false,
-  error: null,
+  loading: true,
 };
 
-export const authSlice = createSlice({
+
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
-    setAuth: (state, action) => {
-      state.isAuthReady = action.payload;
-    },
-  },
-});
+    setUser :(state, action) => {
+      if (action.payload) {
+        state.user = action.payload;
+        state.isAuthReady = true;
+      }else {
+        state.user = null;
+        state.isAuthReady = false;
+      }
+      state.loading = false;
+    }
+  }
+})
 
-export const { setUser, setAuth } = authSlice.actions;
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;
