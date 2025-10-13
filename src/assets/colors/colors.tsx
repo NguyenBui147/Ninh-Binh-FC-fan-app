@@ -1,4 +1,4 @@
-const Colors = {
+const colors = {
   black: 'black',
   white: 'white',
   blue: 'blue',
@@ -71,4 +71,5 @@ const Colors = {
   primaryLoginColor: '#195658',
 
 }
-export default Colors
+
+export default colors

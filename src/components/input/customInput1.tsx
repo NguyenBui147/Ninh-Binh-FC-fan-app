@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
-import Colors from '../../assets/colors/Colors';
+import colors from '../../assets/colors/colors';
 
 export default function CustomInput1({
   label = "",
@@ -8,7 +8,7 @@ export default function CustomInput1({
   secureTextEntry = false,
   icon = null,
   value = "",
-  onChangeText = (text) => {String},
+  onChangeText = () => {String}
 }) {
   return (
     <View style={styles.inputContainer}>
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: Colors.white,
+        backgroundColor: colors.white,
         borderRadius: 16,
         borderWidth: 1,
-        borderColor: Colors.gray,
+        borderColor: colors.gray,
         paddingHorizontal: 14,
         paddingVertical: 4,
       },
