@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthStackParamList } from './NavigationTypes';
 import loginScreen from '../screens/Auth/loginScreen';
 import otpScreen from '../screens/Auth/otpScreen';
+import MainScreen from '../screens/Mains/mainScreen';
 
 
 
@@ -16,6 +17,7 @@ const AuthNavigator = () => {
     <AuthStack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
        <AuthStack.Screen name="Login" component={LoginScreen} />
        <AuthStack.Screen name="Otp" component={OtpScreen} />
+       <AuthStack.Screen name="Main" component={MainScreen} />
     </AuthStack.Navigator>
   );
 };

@@ -9,7 +9,7 @@ import colors from '../assets/colors/colors';
 import { icons } from '../assets/icons'; 
 
 // Import các Screens
-import MainScreen from '../screens/Mains/mainScreen';
+import MainScreen from '../screens/Mains/mainScreen'
 import NewsScreen from '../screens/Mains/newsScreen';
 import ShopScreen from '../screens/Mains/shopScreen';
 import UserScreen from '../screens/Mains/userScreen';

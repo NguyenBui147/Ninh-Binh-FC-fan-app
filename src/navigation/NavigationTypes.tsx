@@ -16,6 +16,7 @@ export type RootStackScreensProps
 export type AuthStackParamList = {
     Login: undefined;
     Otp: undefined;
+    Main : undefined;
 }
 export type AuthStackScreensProps
 <T extends keyof AuthStackParamList> = NativeStackScreenProps<AuthStackParamList, T>;
