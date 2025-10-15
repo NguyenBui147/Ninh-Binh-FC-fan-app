@@ -5,7 +5,6 @@ import {
     doc,
     addDoc,
     getDoc,
-    getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     getDocs,
@@ -14,7 +13,14 @@ import {
     serverTimestamp
 } from 'firebase/firestore';
 
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+}from 'firebase/auth';
+
 // app config
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -32,17 +38,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Export 
+
+const auth = getAuth(app);
 export { 
     db,
     collection,
     doc,
+    auth,
     addDoc,
     getDoc,
     getDocs,
     updateDoc,
     deleteDoc,
-    serverTimestamp
+    serverTimestamp,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
 };
 
 export default app;
-export const auth = getAuth(app);

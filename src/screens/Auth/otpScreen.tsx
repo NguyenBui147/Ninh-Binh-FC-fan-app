@@ -1,30 +1,26 @@
-import {  Text, View } from 'react-native'
-import React from 'react'
+import {  Text, View ,} from 'react-native'
+import React, { use } from 'react'
 import RoundedButton from '../../components/buttons/roundedButton';
 import OTPInputField from '../../components/input/otpInput';
+import app from '../../firebase/firebase';
+import Colors from '../../assets/colors/colors';
+import {
+  auth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+  
+}from '../../firebase/firebase';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type OTPRouteProps = NativeStackScreenProps<any, 'Otp'>;
+
 
 const otpScreen = () => {
-  const [otpCode, setOtp] = React.useState('');
-
-  const handleOtpSubmit = async (otp: string) => {
-    setOtp(otp);
-    console.log('OTP entered:', otp);
-  }
+  const route = useRoute<OTPRouteProps>();
   
 
   return (
-    <View>
-      <Text>otpScreen</Text>
-      <OTPInputField
-        length={6}
-        onComplete={handleOtpSubmit}
-      />
-      <RoundedButton
-        text="Xác nhận OTP"
-        backgroundColor={Colors.black}
-        onPress={handleLoginTest}
-      />
-    </View>
+   
   )
 }
 

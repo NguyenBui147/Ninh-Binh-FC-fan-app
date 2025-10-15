@@ -15,7 +15,7 @@ export type RootStackScreensProps
 
 export type AuthStackParamList = {
     Login: undefined;
-    Otp: undefined;
+    Otp: {confirmation: any} | undefined;
     Main : undefined;
 }
 export type AuthStackScreensProps
