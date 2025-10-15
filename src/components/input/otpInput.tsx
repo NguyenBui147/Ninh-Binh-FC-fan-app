@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Keyboard } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
 
-// Định nghĩa props cho component
 interface OTPInputProps {
-  length?: number; // Độ dài của mã OTP
-  onComplete?: (otp: string) => void; // Hàm callback khi nhập xong
+  length?: number; // otp length
+  onComplete?: (otp: string) => void; // callback
 }
 
 const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
@@ -14,12 +13,12 @@ const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
   const inputs = useRef<any[]>([]);
 
   useEffect(() => {
-    // Tự động focus vào ô đầu tiên khi component được render
+    // Auto focus on the first input 
     inputs.current[0]?.focus();
   }, []);
 
   const handleChange = (text: string, index: number) => {
-    // Chỉ cho phép nhập số
+    // Only numbers
     if (!/^[0-9]*$/.test(text)) {
       return;
     }
@@ -28,15 +27,15 @@ const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
     newOtp[index] = text;
     setOtp(newOtp);
 
-    // Di chuyển tới ô tiếp theo nếu đã nhập xong 1 ký tự
+    // Move to the next i
     if (text && index < length - 1) {
       inputs.current[index + 1]?.focus();
     }
 
-    // Gộp mảng otp thành chuỗi
+    // combine otp array to string
     const otpValue = newOtp.join('');
 
-    // Nếu đã nhập đủ, gọi callback onComplete và ẩn bàn phím
+    // Call onComplete if all inputs are filled
     if (otpValue.length === length) {
       onComplete?.(otpValue);
       Keyboard.dismiss();

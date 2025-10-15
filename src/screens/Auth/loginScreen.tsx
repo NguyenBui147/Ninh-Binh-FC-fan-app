@@ -4,10 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import RoundedButton from '../../components/buttons/roundedButton';
 import Colors from '../../assets/colors/colors'
+import PhoneInput from '../../components/input/phoneInput';
+
 // Đã loại bỏ import { icons } }
 import { RootStackParamList } from '../../navigation/NavigationTypes';
 
-// Khai báo kiểu props cho màn hình Login
+
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'AuthStack'>;
 
 
@@ -26,8 +28,11 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer} style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headlineText}>KIỂM TRA ĐIỀU HƯỚNG</Text>
-                <Text style={styles.subHeadlineText}>Chuyển sang luồng chính để test Tabs.</Text>
+                <PhoneInput 
+                />
+                
             </View>
+            
 
             {/* Đã loại bỏ View inputGroup và CustomInput1 */}
 
@@ -55,8 +60,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     header: {
-        marginBottom: 40,
         alignItems: 'center',
+        width: '100%',
+        
+        marginBottom: 40,
+        
     },
     headlineText: {
         fontSize: 24,

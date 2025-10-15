@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.facebook.react")
-    id("com.google.gms.google-services") // Firebase
+    id("com.google.gms.google-services") // firebase
 }
 
 react {
@@ -15,7 +15,7 @@ def jscFlavor = "io.github.react-native-community:jsc-android:2026004.+"
 android {
     namespace "com.ninhbinhfc"
 
-    // ✅ Cú pháp mới: compileSdk = số
+
     compileSdk = rootProject.ext.compileSdkVersion
     buildToolsVersion = rootProject.ext.buildToolsVersion
     ndkVersion = rootProject.ext.ndkVersion
@@ -23,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.ninhbinhfc"
 
-        // ✅ Cú pháp mới: minSdk / targetSdk
+    
         minSdk = rootProject.ext.minSdkVersion
         targetSdk = rootProject.ext.targetSdkVersion
 
@@ -61,8 +61,10 @@ dependencies {
         implementation jscFlavor
     }
 
-    // Firebase
+    // firebase
     implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore")
 }
+
+apply plugin: 'com.google.gms.google-services'
