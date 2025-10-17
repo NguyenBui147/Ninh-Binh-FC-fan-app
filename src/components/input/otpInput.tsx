@@ -72,6 +72,7 @@ const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginVertical:20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
@@ -80,7 +81,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 60,
     fontSize: 24,
-    textAlign: 'center',
+    
+    textAlign: 'justify',
   },
 });
 

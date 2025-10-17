@@ -81,3 +81,4 @@ serviceAccountKey.json
 firebaseConfig.ts
 google-services.json
 GoogleService-Info.plist
+firebase.js

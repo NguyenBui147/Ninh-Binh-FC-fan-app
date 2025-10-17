@@ -9,6 +9,7 @@ const appNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Login" component={loginScreen} />
+            
             {/* <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
         </Stack.Navigator>

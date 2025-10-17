@@ -4,6 +4,6 @@ export const icons = {
   newsIcon: require('./newsIcon').default,
   shopIcon: require('./shopIcon').default,
   userIcon: require('./userIcon').default,
-  ninhbinhfcLogo: require('./nbfclogo.png').default,
+  ninhbinhFCLogo: require('./nbfclogo.png').default,
   
 };

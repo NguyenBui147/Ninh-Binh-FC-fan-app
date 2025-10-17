@@ -1,13 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-
-
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 
 export type RootStackParamList = {
     Splash: undefined;
     AuthStack : undefined;
     MainTabs: undefined;
+    Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
 }
 
 export type RootStackScreensProps
@@ -15,7 +15,7 @@ export type RootStackScreensProps
 
 export type AuthStackParamList = {
     Login: undefined;
-    Otp: {confirmation: any} | undefined;
+    Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
     Main : undefined;
 }
 export type AuthStackScreensProps

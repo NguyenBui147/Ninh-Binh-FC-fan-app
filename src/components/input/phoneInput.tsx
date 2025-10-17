@@ -1,26 +1,40 @@
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 
-const PhoneInput = () => {
-  const [phone, setPhone] = React.useState('');
 
+interface PhoneInputProps {
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder?: string;
+}
+
+const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChangeText, placeholder }) => {
   const handleChange = (text: string) => {
-    // keep numbers only
+    // Chỉ giữ lại ký tự số
     const digitsOnly = text.replace(/[^0-9]/g, '');
-    setPhone(digitsOnly);
+    onChangeText(digitsOnly);
   };
 
   return (
     <TextInput
-    style={{ width: '100%', height: 0 }}
+      style={styles.input}
       mode="outlined"
       label="Số điện thoại"
-      placeholder="Nhập số điện thoại"
+      placeholder={placeholder}
       keyboardType="phone-pad"
-      value={phone}
+      value={value}
       onChangeText={handleChange}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    width: '100%',
+    height: 50,
+    marginBottom: 20,
+  },
+});
 
 export default PhoneInput;

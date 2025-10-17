@@ -1,4 +1,4 @@
-package com.ninhbinhfc
+package com.ninhbinhFC
 
 import android.app.Application
 import com.facebook.react.PackageList
