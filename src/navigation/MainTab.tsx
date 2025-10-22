@@ -1,88 +1,71 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Keyboard } from 'react-native';
-import { TextInput, useTheme } from 'react-native-paper';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, Text } from 'react-native';
+import { MainTabParamList } from './NavigationTypes';
 
-// Định nghĩa props cho component
-interface OTPInputProps {
-  length?: number; // Độ dài của mã OTP
-  onComplete?: (otp: string) => void; // Hàm callback khi nhập xong
-}
+// Import your main screens
+import mainScreen from '../screens/Mains/mainScreen';
+import newsScreen from '../screens/Mains/newsScreen';
+import shopScreen from '../screens/Mains/shopScreen';
+import userScreen from '../screens/Mains/userScreen';
 
-const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
-  const { colors } = useTheme();
-  const [otp, setOtp] = useState<string[]>(new Array(length).fill(''));
-  const inputs = useRef<any[]>([]);
+// Import icons
+import { icons } from '../assets/icons';
 
-  useEffect(() => {
-    // Tự động focus vào ô đầu tiên khi component được render
-    inputs.current[0]?.focus();
-  }, []);
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
-  const handleChange = (text: string, index: number) => {
-    // Chỉ cho phép nhập số
-    if (!/^[0-9]*$/.test(text)) {
-      return;
-    }
-    
-    const newOtp = [...otp];
-    newOtp[index] = text;
-    setOtp(newOtp);
-
-    // Di chuyển tới ô tiếp theo nếu đã nhập xong 1 ký tự
-    if (text && index < length - 1) {
-      inputs.current[index + 1]?.focus();
-    }
-
-    // Gộp mảng otp thành chuỗi
-    const otpValue = newOtp.join('');
-
-    // Nếu đã nhập đủ, gọi callback onComplete và ẩn bàn phím
-    if (otpValue.length === length) {
-      onComplete?.(otpValue);
-      Keyboard.dismiss();
-    }
-  };
-
-  const handleBackspace = (event: any, index: number) => {
-    // Di chuyển về ô trước đó nếu ô hiện tại rỗng và người dùng nhấn backspace
-    if (event.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
-      inputs.current[index - 1]?.focus();
-    }
-  };
-
+const MainTabNavigator = () => {
   return (
-    <View style={styles.container}>
-      {Array.from({ length }).map((_, index) => (
-        <TextInput
-          key={index}
-          ref={(input) => (inputs.current[index] = input)}
-          style={[styles.input, { borderColor: colors.primary }]}
-          value={otp[index]}
-          onChangeText={(text) => handleChange(text, index)}
-          onKeyPress={(event) => handleBackspace(event, index)}
-          keyboardType="numeric"
-          maxLength={1}
-          textAlign="center"
-          mode="outlined"
-          selectionColor={colors.primary}
-        />
-      ))}
-    </View>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#fff',
+          borderTopWidth: 1,
+          borderTopColor: '#e0e0e0',
+        },
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: '#8E8E93',
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={mainScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <icons.homeIcon />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="News"
+        component={newsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <icons.newsIcon />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Shop"
+        component={shopScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <icons.shopIcon />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={userScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <icons.userIcon />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  input: {
-    width: 50,
-    height: 60,
-    fontSize: 24,
-    textAlign: 'center',
-  },
-});
-
-export default OTPInputField;
+export default MainTabNavigator;

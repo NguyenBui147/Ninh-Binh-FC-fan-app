@@ -22,11 +22,10 @@ export type AuthStackScreensProps
 <T extends keyof AuthStackParamList> = NativeStackScreenProps<AuthStackParamList, T>;
 
 export type MainTabParamList = {
-    MainTab : undefined;
-    ShopTab: undefined;
-    NewsTab: undefined;
-    UserTab: undefined;
-
+    Home: undefined;
+    News: undefined;
+    Shop: undefined;
+    Profile: undefined;
 }
 export type MainTabScreensProps
 <T extends keyof MainTabParamList> = BottomTabScreenProps<MainTabParamList, T>;

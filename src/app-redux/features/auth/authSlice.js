@@ -1,7 +1,7 @@
 import { createSlice , createAsyncThunk} from '@reduxjs/toolkit';
 import { uiSlice } from '../features/ui/uiSlice'
 import axios from 'axios';
-import { auth } from '../../../firebase/firebase'; 
+import { firebaseAuth } from '../../../firebase/firebase'; 
 
 
 const initialState = {

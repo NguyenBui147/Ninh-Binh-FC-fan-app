@@ -11,7 +11,7 @@ interface PhoneInputProps {
 
 const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChangeText, placeholder }) => {
   const handleChange = (text: string) => {
-    // Chỉ giữ lại ký tự số
+    
     const digitsOnly = text.replace(/[^0-9]/g, '');
     onChangeText(digitsOnly);
   };

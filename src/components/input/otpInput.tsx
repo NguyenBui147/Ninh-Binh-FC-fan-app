@@ -27,10 +27,11 @@ const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
     newOtp[index] = text;
     setOtp(newOtp);
 
-    // Move to the next i
+    // Move to the next input if current input has text and not the last input
     if (text && index < length - 1) {
       inputs.current[index + 1]?.focus();
     }
+
 
     // combine otp array to string
     const otpValue = newOtp.join('');
@@ -43,7 +44,7 @@ const OTPInputField: React.FC<OTPInputProps> = ({ length = 6, onComplete }) => {
   };
 
   const handleBackspace = (event: any, index: number) => {
-    // Di chuyển về ô trước đó nếu ô hiện tại rỗng và người dùng nhấn backspace
+    // Move to previous input if current input is empty and backspace is pressed
     if (event.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
       inputs.current[index - 1]?.focus();
     }

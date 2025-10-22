@@ -4,7 +4,7 @@ import React from 'react'
 const splashScreen = () => {
   return (
     <View>
-      <Text>splashScreen</Text>
+      <View style={{ flex: 1, backgroundColor: 'blue' }} />
     </View>
   )
 }

@@ -8,7 +8,7 @@ export default function CustomInput1({
   secureTextEntry = false,
   icon = null,
   value = "",
-  onChangeText = () => {String}
+  onChangeText = () => {}
 }) {
   return (
     <View style={styles.inputContainer}>
@@ -23,7 +23,8 @@ export default function CustomInput1({
           onChangeText={onChangeText}
         />
       </View>
-      {icon && <Image source={icon} style={styles.inputLogo} />}
+      {icon ? <Image source={icon} style={styles.inputLogo} /> : null}
+
     </View>
   );
 }
