@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
 import { MainTabParamList } from './NavigationTypes';
 
 // Import your main screens
@@ -10,7 +9,7 @@ import shopScreen from '../screens/Mains/shopScreen';
 import userScreen from '../screens/Mains/userScreen';
 
 // Import icons
-import { icons } from '../assets/icons';
+import { icons } from '../assets/index';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -33,7 +32,7 @@ const MainTabNavigator = () => {
         component={mainScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <icons.homeIcon />
+            icons.facebook
           ),
         }}
       />
@@ -42,7 +41,7 @@ const MainTabNavigator = () => {
         component={newsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <icons.newsIcon />
+            icons.facebook
           ),
         }}
       />
@@ -51,7 +50,7 @@ const MainTabNavigator = () => {
         component={shopScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <icons.shopIcon />
+            icons.facebook
           ),
         }}
       />
@@ -60,7 +59,7 @@ const MainTabNavigator = () => {
         component={userScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <icons.userIcon />
+            icons.google
           ),
         }}
       />

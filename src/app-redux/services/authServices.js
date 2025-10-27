@@ -1,3 +1,4 @@
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,6 +11,9 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import { RecaptchaVerifier } from 'firebase/auth/web-extension';
+import { useEffect, useState } from 'react';
+import { OtpInput } from 'react-native-otp-entry';
+import { Alert } from 'react-native';
 
 
 export const sendPhoneOtp = async (phoneNumber, recaptchaVerifier) => {
@@ -84,5 +88,16 @@ export const resetPassword = async (email) => {
     }
     catch (error) {
         return { error: error.message };
+    }
+}
+
+export const resetPasswordOtp = async (OtpInput)=>{
+    try {
+        await sendPhoneOtp(auth , OtpInput);
+        return {success:true}
+
+
+    }catch(error){
+        Alert.alert(error)
     }
 }

@@ -7,7 +7,7 @@ export type RootStackParamList = {
     Splash: undefined;
     AuthStack : undefined;
     MainTabs: undefined;
-    Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
+    
 }
 
 export type RootStackScreensProps
@@ -16,6 +16,7 @@ export type RootStackScreensProps
 export type AuthStackParamList = {
     Login: undefined;
     Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
+    
     Main : undefined;
 }
 export type AuthStackScreensProps

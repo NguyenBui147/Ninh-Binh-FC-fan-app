@@ -4,11 +4,11 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { store } from './app-redux/store/index'; // Đảm bảo đường dẫn đúng
-import AuthNavigator from './navigation/AuthStack'; // Đảm bảo đường dẫn đúng
-import MainTabNavigator from './navigation/MainTab'; // Đảm bảo đường dẫn đúng
-import { RootStackParamList } from './navigation/NavigationTypes'; // Đảm bảo đường dẫn đúng
-import splashScreen from './screens/splashScreen'; // Đảm bảo đường dẫn đúng
+import { store } from './app-redux/store/index'; 
+import AuthNavigator from './navigation/AuthStackNavigator'; 
+import MainTabNavigator from './navigation/MainTab'; 
+import { RootStackParamList } from './navigation/NavigationTypes'; 
+import splashScreen from './screens/splashScreen'; 
 import { Provider } from 'react-redux';
 import { useAuth } from './hooks/useAuth'; 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -34,9 +34,7 @@ const RootNavigator = () => {
   );
 };
 
-/**
- * ✅ BƯỚC 2: Component App chính bây giờ chỉ có nhiệm vụ là cung cấp Redux Provider
- */
+
 const App = () => {
   return (
     <Provider store={store}>
