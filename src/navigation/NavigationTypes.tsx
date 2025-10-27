@@ -4,19 +4,17 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 
 export type RootStackParamList = {
-    Splash: undefined;
     AuthStack : undefined;
     MainTabs: undefined;
-    
 }
 
 export type RootStackScreensProps
 <T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
 
 export type AuthStackParamList = {
+    Splash:undefined;
     Login: undefined;
     Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
-    
     Main : undefined;
 }
 export type AuthStackScreensProps
@@ -24,9 +22,12 @@ export type AuthStackScreensProps
 
 export type MainTabParamList = {
     Home: undefined;
+    Main:undefined;
     News: undefined;
     Shop: undefined;
     Profile: undefined;
+    Match:undefined;
+    User:undefined;
 }
 export type MainTabScreensProps
 <T extends keyof MainTabParamList> = BottomTabScreenProps<MainTabParamList, T>;

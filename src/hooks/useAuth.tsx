@@ -1,19 +1,23 @@
+
+
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../app-redux/features/auth/authSlice'; // Đảm bảo đường dẫn đúng
 import { FirebaseAuthTypes } from '@react-native-firebase/auth'; // Import kiểu User
 
 
-import auth from '@react-native-firebase/auth';
-
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 
 type RootState = {
   auth: {
     user: FirebaseAuthTypes.User | null;
-    isAuthReady: boolean; 
+    isAuthReady: boolean;
     loading: boolean;
   };
 };
+
+
+const auth = getAuth();
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -21,14 +25,18 @@ export const useAuth = () => {
 
   useEffect(() => {
     
-    const subscriber = auth().onAuthStateChanged((firebaseUser) => {
+    // 3. Dùng hàm onAuthStateChanged(auth, ...) (cú pháp mới)
+    const subscriber = onAuthStateChanged(auth, (firebaseUser) => {
       
+      console.log('Auth state changed, user: ', firebaseUser?.uid || 'logged out');
       dispatch(setUser(firebaseUser));
     });
-    return subscriber;
-  }, [dispatch]); 
+
+    return subscriber; // cleanup on unmount
+  }, [dispatch]);
+
   return {
-    user: user, 
-    isLoading: loading 
+    user: user,
+    isLoading: loading,
   };
 };

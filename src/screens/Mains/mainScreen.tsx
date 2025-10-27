@@ -1,10 +1,12 @@
-import {Text, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
+import { Text } from 'react-native-paper'
 
 const MainScreen = () => {
   return (
     <View>
-      <Text>MainScreen </Text>
+      <Text variant="displayLarge">Display Large</Text>
+
     </View>
   )
 }

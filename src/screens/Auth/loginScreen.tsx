@@ -13,6 +13,7 @@ import { images, icons } from '../../assets/index';
 import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
 import auth from '@react-native-firebase/auth';
 
+
 const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,9 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
 
     try {
       await auth().signInWithEmailAndPassword(email, password);
+      navigation.replace('Main')
       console.log('Đăng nhập thành công');
+      
     } catch (error: any) {
       let errorMsg = 'Email hoặc mật khẩu không đúng.';
       console.error('Firebase login error:', error);
@@ -40,6 +43,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
       Alert.alert('Lỗi đăng nhập', errorMsg);
     } finally {
       setLoading(false);
+      
     }
   };
 
@@ -86,16 +90,14 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
         ) : (
           <RoundedButton
             text="Đăng nhập"
-            // backgroundImageSource={""} // Xóa prop không cần thiết
+            backgroundImageSource={""} 
             backgroundColor={Colors.black}
             onPress={handleLogin}
           />
         )}
 
         <View style={styles.footer}>
-          {/* Lưu ý: Để `icon="facebook"` hoạt động, 
-            bạn PHẢI cài đặt react-native-vector-icons cho react-native-paper 
-          */}
+          
           <IconButton
             icon="facebook" // Dùng tên icon chuẩn
             iconColor="#1877F2" // Màu xanh của FB
@@ -127,13 +129,13 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 20,
     alignItems: 'center',
-    justifyContent: 'center', // Căn giữa nội dung theo chiều dọc
+    justifyContent: 'center', 
   },
   logo: {
     width: 150,
     height: 150,
     resizeMode: 'contain',
-    marginBottom: 20, // Thêm margin
+    marginBottom: 20, 
   },
   headlineText: {
     fontSize: 24,
@@ -146,24 +148,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.black,
     textAlign: 'center',
-    marginBottom: 30, // Tăng margin
+    marginBottom: 30, 
   },
-  // Thêm style cho input
+  
+
   inputContainer: {
     width: '100%',
   },
   input: {
-    marginBottom: 15, // Khoảng cách giữa 2 input
+    marginBottom: 15, 
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'center', // Căn giữa 2 icon
+    justifyContent: 'center', 
     alignItems: 'center',
-    marginTop: 30, // Đẩy phần footer xuống
+    marginTop: 30, 
     width: '100%',
-    // Đã xóa các style cũ: flex, margin, padding, backgroundColor
+    
   },
-  // Xóa style "header" không dùng
+ 
 });
 
 export default LoginScreen;
