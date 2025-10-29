@@ -26,7 +26,7 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Navigator  screenOptions={{ headerShown: false }}>
         
         {user ? (
           <RootStack.Screen name="MainTabs" component={MainTabNavigator} />

@@ -29,7 +29,6 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
 
     try {
       await auth().signInWithEmailAndPassword(email, password);
-      navigation.replace('Main')
       console.log('Đăng nhập thành công');
       
     } catch (error: any) {
