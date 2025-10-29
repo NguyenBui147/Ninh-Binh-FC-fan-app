@@ -37,20 +37,7 @@ const MainTabNavigator = () => {
       renderScene={renderScene}
     />
   )
-  // return (
-  //   <MainStack.Navigator 
-  //   initialRouteName="Main" 
-  //   screenOptions={{ 
-  //     headerShown: false ,
-  //     gestureEnabled: false
-  //     }}>
-
-  //      <MainStack.Screen name="Main" component={MainScreen} />
-  //      <MainStack.Screen name="News" component={NewsScreen} />
-  //      <MainStack.Screen name="Shop" component={ShopScreen} />
-  //      <MainStack.Screen name="User" component={UserScreen} />
-  //   </MainStack.Navigator>
-  // );
+  
 };
 
 

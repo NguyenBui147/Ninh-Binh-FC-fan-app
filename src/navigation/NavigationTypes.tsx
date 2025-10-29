@@ -16,6 +16,8 @@ export type AuthStackParamList = {
     Login: undefined;
     Otp: { confirmationResult: FirebaseAuthTypes.ConfirmationResult };
     Main : undefined;
+    Register:undefined;
+
 }
 export type AuthStackScreensProps
 <T extends keyof AuthStackParamList> = NativeStackScreenProps<AuthStackParamList, T>;

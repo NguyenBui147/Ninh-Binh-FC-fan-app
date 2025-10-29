@@ -1,80 +1,75 @@
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import React, { useState, Fragment } from 'react';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-//paper
 import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
-
-//custom
-import RoundedButton from '../../components/buttons/roundedButton';
-import Colors from '../../assets/colors/colors';
-
-
-import { images, icons } from '../../assets/index';
-import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
 import auth from '@react-native-firebase/auth';
 
+import RoundedButton from '../../components/buttons/roundedButton';
+import LinkText from '../../components/texts/linkText';
+import Colors from '../../assets/colors/colors';
+import { images } from '../../assets/index';
+import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
 
 const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [passwordVisible, setPasswordVisible] = useState(false); 
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Vui lòng nhập đầy đủ email và mật khẩu');
+      Alert.alert('Lỗi', 'Vui lòng nhập đầy đủ email và mật khẩu.');
       return;
     }
-    setLoading(true);
 
+    setLoading(true);
     try {
       await auth().signInWithEmailAndPassword(email, password);
       console.log('Đăng nhập thành công');
-      
     } catch (error: any) {
       let errorMsg = 'Email hoặc mật khẩu không đúng.';
       console.error('Firebase login error:', error);
-      if (error.code === 'auth/invalid-email') {
-        errorMsg = 'Định dạng email không hợp lệ.';
-      } else if (error.code === 'auth/user-not-found') {
-        errorMsg = 'Không tìm thấy người dùng với email này.';
-      }
+
+      if (error.code === 'auth/invalid-email') errorMsg = 'Định dạng email không hợp lệ.';
+      else if (error.code === 'auth/user-not-found') errorMsg = 'Không tìm thấy người dùng với email này.';
+
       Alert.alert('Lỗi đăng nhập', errorMsg);
     } finally {
       setLoading(false);
-      
     }
   };
 
+  const handleRegister = () => navigation.navigate('Register');
+
   return (
-    // Bọc trong View để căn giữa tốt hơn
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Fragment>
           <Image source={images.nbfc} style={styles.logo} resizeMode="contain" />
         </Fragment>
-        <Text style={styles.headlineText}>Chào mừng bạn đến với Ninh Bình FC</Text>
-        <Text style={styles.subHeadlineText}>Đăng nhập để tiếp tục</Text>
 
-        {/* Bọc Input trong View để set width 100% */}
+        <Text style={styles.title}>Chào mừng bạn đến với Ninh Bình FC</Text>
+        
+
         <View style={styles.inputContainer}>
           <TextInput
-            label="Email"
+            
+            placeholder="Email"
             value={email}
-            onChangeText={text => setEmail(text)}
-            style={styles.input}
-            mode="outlined" // Thêm mode "outlined" cho đẹp
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={text => setPassword(text)}
-            secureTextEntry={!passwordVisible} // Dùng state
+            onChangeText={setEmail}
             style={styles.input}
             mode="outlined"
-            // Logic để đổi icon
+            keyboardType="email-address"
+            autoCapitalize="none"
+            
+          />
+          <TextInput
+            placeholder="Mật khẩu"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!passwordVisible}
+            style={styles.input}
+            mode="outlined"
             right={
               <TextInput.Icon
                 icon={passwordVisible ? 'eye-off' : 'eye'}
@@ -85,87 +80,113 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
         </View>
 
         {loading ? (
-          <ActivityIndicator size="large" color={Colors.black} style={{ marginTop: 20 }} />
+          <ActivityIndicator size="large" color={Colors.black} />
         ) : (
           <RoundedButton
             text="Đăng nhập"
-            backgroundImageSource={""} 
+            backgroundImageSource=""
             backgroundColor={Colors.black}
             onPress={handleLogin}
           />
         )}
 
-        <View style={styles.footer}>
-          
-          <IconButton
-            icon="facebook" // Dùng tên icon chuẩn
-            iconColor="#1877F2" // Màu xanh của FB
-            containerColor="#f0f2f5" // Màu nền xám nhạt
-            size={24}
-            onPress={() => console.log('Pressed FB')}
-          />
-          <IconButton
-            icon="google" // Dùng tên icon chuẩn
-            iconColor="#DB4437" // Màu đỏ của Google
-            containerColor="#f0f2f5"
-            size={24}
-            onPress={() => console.log('Pressed Google')}
-          />
+        <View style={styles.registerContainer}>
+          <Text style={styles.registerText}>Bạn chưa có tài khoản? </Text>
+          <LinkText text="Đăng ký ngay" onPress={handleRegister} />
         </View>
 
-        {/* Xóa Fragment text bị lặp ở đây */}
+        <View style={styles.footer}>
+          <Text style={styles.footerTitle}>Hoặc đăng nhập bằng</Text>
+          <View style={styles.socialContainer}>
+            <IconButton
+              icon="facebook"
+              iconColor={Colors.blue}
+              containerColor={Colors.gray}
+              size={28}
+              onPress={() => console.log('Facebook login')}
+            />
+            <IconButton
+              icon="google"
+              iconColor={Colors.primaryRed}
+              containerColor={Colors.gray}
+              size={28}
+              onPress={() => console.log('Google login')}
+            />
+            <IconButton
+              icon="phone"
+              iconColor={Colors.green}
+              containerColor={Colors.gray}
+              size={28}
+              onPress={() => console.log('Phone login')}
+            />
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
 
+export default LoginScreen;
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.gradient2,
   },
   container: {
     flex: 1,
-    margin: 20,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center', 
   },
   logo: {
-    width: 150,
-    height: 150,
-    resizeMode: 'contain',
-    marginBottom: 20, 
+    width: 120,
+    height: 120,
   },
-  headlineText: {
+  title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: Colors.black,
-    marginBottom: 5,
     textAlign: 'center',
+    paddingBottom: 20,
   },
-  subHeadlineText: {
+  subtitle: {
     fontSize: 16,
     color: Colors.black,
     textAlign: 'center',
-    marginBottom: 30, 
+    marginBottom: 32,
   },
-  
-
   inputContainer: {
+    backgroundColor:Colors.white,
+    padding:20,
     width: '100%',
+    marginBottom: 24,
   },
   input: {
-    marginBottom: 15, 
+    borderColor:Colors.black,
+    marginBottom: 16,
+    backgroundColor: Colors.white,
+  },
+  registerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  registerText: {
+    color: Colors.black,
+    fontSize: 14,
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'center', 
+    marginTop: 40,
     alignItems: 'center',
-    marginTop: 30, 
-    width: '100%',
-    
   },
- 
+  footerTitle: {
+    fontSize: 14,
+    color: Colors.gray,
+    marginBottom: 12,
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    gap: 12,
+  },
 });
-
-export default LoginScreen;
