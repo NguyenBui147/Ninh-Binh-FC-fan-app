@@ -6,6 +6,7 @@ import ProductScreen from '../screens/Subs/ProductScreen';
 import PlayerScreen from '../screens/Subs/PlayerScreen';
 import ProfileScreen from '../screens/Subs/ProfileScreen';
 import TicketScreen from '../screens/Subs/TicketScreen';
+import MainScreen from '../screens/Mains/MainScreen';
 
 
 const SubStack = createNativeStackNavigator<SubStackParamList>();
@@ -22,7 +23,7 @@ const SubStackNavigator = () => {
        <SubStack.Screen name="Player" component={PlayerScreen} />
        <SubStack.Screen name="Ticket" component={TicketScreen} />
         <SubStack.Screen name="Product" component={ProductScreen} />
-       
+       <SubStack.Screen name="Default" component={MainScreen} />
     </SubStack.Navigator>
   );
 };

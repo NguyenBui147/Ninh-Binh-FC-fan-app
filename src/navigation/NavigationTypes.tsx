@@ -7,6 +7,7 @@ export type RootStackParamList = {
     AuthStack : undefined;
     MainTabs: undefined;
     SubStack: undefined;
+    Profile:undefined;
 }
 
 export type RootStackScreensProps
@@ -48,6 +49,7 @@ export type SubStackParamList = {
     Ticket: undefined;
     Product: undefined;
     NewsDetails: undefined;
+    Default:undefined;
     
 }
 export type SubStackScreensProps

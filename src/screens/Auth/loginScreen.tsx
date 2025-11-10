@@ -44,6 +44,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      
       <View style={styles.container}>
 
         

@@ -15,6 +15,7 @@ import { useAuth } from '../hooks/useAuth';
 import { ActivityIndicator } from 'react-native-paper';
 import Colors from '../assets/colors/colors';
 import SubStackNavigator from './SubStack';
+import ProfileScreen from '../screens/Subs/ProfileScreen';
 
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -33,6 +34,7 @@ const RootNavigator = () => {
           <>
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
             <RootStack.Screen name="SubStack" component={SubStackNavigator} />
+            <RootStack.Screen name="Profile" component={ProfileScreen} />
           </>
         ) : (
           <RootStack.Screen name="AuthStack" component={AuthNavigator} />

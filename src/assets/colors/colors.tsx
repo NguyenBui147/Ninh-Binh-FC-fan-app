@@ -63,6 +63,7 @@ const Colors = {
   gray5: '#EEEEEE',
   orange: '#D48D23',
   orange1: '#FBFCFF',
+  brown: 'rgb(106,69,26)',
   blue1: '#3386CE',
   blue2: '#266AA5',
   blue3: '#F2FFFD',
