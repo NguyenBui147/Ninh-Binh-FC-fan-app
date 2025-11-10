@@ -1,16 +1,19 @@
 module.exports = {
   presets: ['module:@react-native/babel-preset'],
+  
   plugins: [
-    'nativewind/babel',
+
+    
+    // Plugin react-native-dotenv (sửa lại tên module)
     [
       'module:react-native-dotenv',
       {
+        envName: 'APP_ENV',
         moduleName: '@env',
         path: '.env',
-        blacklist: null,
-        whitelist: null,
         safe: false,
-        allowUndefined: true
+        allowUndefined: true,
+        verbose: false,
       }
     ]
   ]
