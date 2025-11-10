@@ -1,9 +1,9 @@
 
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../app-redux/features/auth/authSlice'; // Đảm bảo đường dẫn đúng
-import { FirebaseAuthTypes } from '@react-native-firebase/auth'; // Import kiểu User
+import { setUser } from '../app-redux/features/auth/authSlice'; 
+import { FirebaseAuthTypes } from '@react-native-firebase/auth'; 
 
 
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';

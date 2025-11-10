@@ -2,7 +2,8 @@ import { Alert, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import React, { useState } from 'react'
 
-import auth from '@react-native-firebase/auth';
+
+import { getAuth } from '@react-native-firebase/auth';
 import Colors from '../../assets/colors/colors'
 import { ActivityIndicator, TextInput } from 'react-native-paper'
 import RoundedButton from '../../components/buttons/roundedButton'
@@ -21,7 +22,7 @@ const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = ({navigation}
 
 
     try{
-      await auth().createUserWithEmailAndPassword(email,password),
+      await getAuth().createUserWithEmailAndPassword(email,password),
      Alert.alert(
         'Tạo tài khoản thành công!'
       );
@@ -88,7 +89,7 @@ const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = ({navigation}
           <RoundedButton
             text="Đăng ký"
             backgroundImageSource=""
-            backgroundColor={Colors.black}s
+            backgroundColor={Colors.black}
             onPress={handleRegister}
           />
         )}
@@ -105,7 +106,8 @@ const styles = StyleSheet.create({
 
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.maroon,
+    
   },
   container: {
     flex: 1,

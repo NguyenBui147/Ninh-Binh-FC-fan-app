@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from 'react';
-import { StyleSheet, Text, View, Alert, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Alert, Image, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
-import auth from '@react-native-firebase/auth';
+
+import { getAuth } from '@react-native-firebase/auth';
 
 import RoundedButton from '../../components/buttons/roundedButton';
 import LinkText from '../../components/texts/linkText';
@@ -24,7 +25,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
 
     setLoading(true);
     try {
-      await auth().signInWithEmailAndPassword(email, password);
+      await getAuth().signInWithEmailAndPassword(email, password);
       console.log('Đăng nhập thành công');
     } catch (error: any) {
       let errorMsg = 'Email hoặc mật khẩu không đúng.';
@@ -44,13 +45,13 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Fragment>
-          <Image source={images.nbfc} style={styles.logo} resizeMode="contain" />
-        </Fragment>
 
-        <Text style={styles.title}>Chào mừng bạn đến với Ninh Bình FC</Text>
         
-
+        <View style={styles.header}>
+          <Image source={images.nbfc} style={styles.headerLogo} resizeMode="contain" />
+          <Text style={styles.title}>Chào mừng bạn đến với Ninh Bình FC</Text>
+        </View>
+        
         <View style={styles.inputContainer}>
           <TextInput
             
@@ -85,7 +86,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
           <RoundedButton
             text="Đăng nhập"
             backgroundImageSource=""
-            backgroundColor={Colors.black}
+            backgroundColor={Colors.darkNavy}
             onPress={handleLogin}
           />
         )}
@@ -131,33 +132,41 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.gradient2,
+    backgroundColor: Colors.maroon,
+    color:Colors.yellow,
   },
   container: {
     flex: 1,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 24,
+    
   },
-  logo: {
-    width: 120,
-    height: 120,
+  header:{
+    marginVertical:36,
+    alignSelf:'center',
+    
+  },
+  headerLogo: {
+    width: 100,
+    height: 100,
+    alignSelf:'center',
+
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: '700',
-    color: Colors.black,
+    color: Colors.yellow,
     textAlign: 'center',
     paddingBottom: 20,
   },
   subtitle: {
     fontSize: 16,
-    color: Colors.black,
+    
+    color: Colors.yellow,
     textAlign: 'center',
     marginBottom: 32,
   },
   inputContainer: {
-    backgroundColor:Colors.white,
+    backgroundColor:Colors.darkNavy,
     padding:20,
     width: '100%',
     marginBottom: 24,

@@ -8,7 +8,7 @@ import { getAuth, signOut } from '@react-native-firebase/auth'
 const auth = getAuth();
 
 
-const UserScreen = () => {
+const SocialScreen = () => {
   const handleLogout = async () =>{
     try{
       
@@ -32,5 +32,5 @@ const UserScreen = () => {
   )
 }
 
-export default UserScreen
+export default SocialScreen
 

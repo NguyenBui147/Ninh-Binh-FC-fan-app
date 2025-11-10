@@ -14,22 +14,26 @@ import { Provider } from 'react-redux';
 import { useAuth } from '../hooks/useAuth'; 
 import { ActivityIndicator } from 'react-native-paper';
 import Colors from '../assets/colors/colors';
+import SubStackNavigator from './SubStack';
+
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   const { user, isLoading } = useAuth();
+
   if (isLoading) {
-   <ActivityIndicator size="large" color={Colors.black} />
-        
+    return <ActivityIndicator size="large" color={Colors.black} />;
   }
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator  screenOptions={{ headerShown: false }}>
-        
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
-          <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
+          <>
+            <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
+            <RootStack.Screen name="SubStack" component={SubStackNavigator} />
+          </>
         ) : (
           <RootStack.Screen name="AuthStack" component={AuthNavigator} />
         )}
@@ -37,6 +41,7 @@ const RootNavigator = () => {
     </NavigationContainer>
   );
 };
+
 
 const App = () => {
   return (
