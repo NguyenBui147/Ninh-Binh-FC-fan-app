@@ -1,13 +1,13 @@
 import {  Text, View } from 'react-native'
 import React from 'react'
 
-const PlayerScreen = () => {
+const DetailedNewsScreen = () => {
   return (
     <View>
-      <Text>PlayerScreen</Text>
+      <Text>NewsScreen</Text>
     </View>
   )
 }
 
-export default PlayerScreen
 
+export default DetailedNewsScreen

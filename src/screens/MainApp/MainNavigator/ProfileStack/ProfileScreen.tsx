@@ -1,6 +1,6 @@
 import { Alert, Text, View } from 'react-native'
 import React from 'react'
-import RoundedButton from '../../components/buttons/roundedButton'
+import RoundedButton from '../../../../components/buttons/roundedButton';
 import { getAuth, signOut } from '@react-native-firebase/auth'
 
 
@@ -8,7 +8,7 @@ import { getAuth, signOut } from '@react-native-firebase/auth'
 const auth = getAuth();
 
 
-const SocialScreen = () => {
+const ProfileScreen = () => {
   const handleLogout = async () =>{
     try{
       
@@ -32,5 +32,5 @@ const SocialScreen = () => {
   )
 }
 
-export default SocialScreen
+export default ProfileScreen
 

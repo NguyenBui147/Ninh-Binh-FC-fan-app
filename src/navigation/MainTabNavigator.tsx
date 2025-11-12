@@ -1,173 +1,162 @@
-import React, {  useState } from 'react';
-
-import NewsScreen from '../screens/Mains/NewsScreen';
-import ShopScreen from '../screens/Mains/ShopScreen';
-import MainScreen from '../screens/Mains/MainScreen';
-
-import MatchesScreen from '../screens/Mains/MatchesScreen';
-
-import Colors from '../assets/colors/colors';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, StyleSheet, Image ,Pressable} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Image,Text, StyleSheet, View ,Pressable} from 'react-native';
+// --- Import các Stack con ---
+import HomeStack from './Screen Stacks/HomeStack'; 
+import NewsStack from './Screen Stacks/NewsStack'; 
+import ShopStack from './Screen Stacks/ShopStack';
+import ScheduleStack from './Screen Stacks/ScheduleStack';
+import ProfileStack from './Screen Stacks/ProfileStack';
+
+// --- Import Constants ---
+import Colors from '../assets/colors/colors';
 import { images } from '../assets';
+import { MainTabParamList } from './NavigationTypes'; 
 
-import SocialScreen from '../screens/Mains/SocialScreen';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { SubStackScreensProps } from './NavigationTypes';
 
-type IconName = 
-  | 'newspaper-variant'
-  | 'store'
-  | 'home'
-  | 'calendar'
-  | 'account';
 
-type Route = {
-  key: string;
-  title: string;
-  icon: IconName;
-};
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
-const routes: Route[] = [
-  { key: 'news', title: 'Tin tức', icon: 'newspaper-variant' },
-  { key: 'shop', title: 'Cửa hàng', icon: 'store' },
-  { key: 'main', title: 'Trang chủ', icon: 'home' },
-  { key: 'matches', title: 'Lịch thi đấu', icon: 'calendar' },
-  { key: 'social', title: 'Cộng đồng', icon: 'account' },
+// --- Khai báo hằng số ---
+const routesConfig: { key: keyof MainTabParamList; title: string; icon: [string, string]; component: React.ComponentType<any> }[] = [
+    { key: 'home', title: 'Trang chủ', icon: ['home-outline', 'home'], component: HomeStack },
+    { key: 'news', title: 'Tin tức', icon: ['newspaper-variant-outline', 'newspaper-variant'], component: NewsStack },
+    { key: 'shop', title: 'Cửa hàng', icon: ['store-outline', 'store'], component: ShopStack },
+    { key: 'matches', title: 'Lịch thi đấu', icon: ['calendar-outline', 'calendar'], component: ScheduleStack },
+    { key: 'profile', title: 'Cộng đồng', icon: ['account-group-outline', 'account-group'], component: ProfileStack },
 ];
 
-const MainTabNavigator:React.FC<SubStackScreensProps<'Default'>> = ({navigation}) => {
-  const [index, setIndex] = useState(2);
+const MainTabNavigator = () => {
+    const navigation = useNavigation();
 
-  const renderScene = () => {
-    switch (routes[index].key) {
-      case 'news':
-        return <NewsScreen />;
-      case 'shop':
-        return <ShopScreen />;
-      case 'main':
-        return <MainScreen />;
-      case 'matches':
-        return <MatchesScreen />;
-      case 'social':
-        return <SocialScreen />;
-      default:
-        return null;
-    }
-  };
+    // Hàm tùy chỉnh icon
+    const getTabBarIcon = (routeName: keyof MainTabParamList, focused: boolean, color: string, size: number) => {
+        const config = routesConfig.find(r => r.key === routeName);
+        if (!config) return null;
 
-  return (
-    <SafeAreaView style={styles.container}>
-      {/* APPBAR */}
-      <View style={styles.appBar}>
-        
-        <Image source={images.nbfc} style={styles.logo} />
+        const [inactiveIcon, activeIcon] = config.icon;
+        const iconName = focused ? activeIcon : inactiveIcon;
 
-        <View style={{ flexDirection: 'row', gap: 15 }}>
-          
-        <Pressable
-          onPress={() => navigation.navigate('Profile')}
-          style={styles.iconCircle}>
-          <MaterialCommunityIcons name="account" size={24} color={Colors.white} />
-        </Pressable>
-        <Pressable
-          onPress={() => console.log('Notifications')}
-          style={styles.iconCircle}>
-          <MaterialCommunityIcons name="bell-outline" size={24} color={Colors.white} />
-        </Pressable>
-          </View>
-      </View>
+        return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+    };
 
-      {/* MAIN CONTENT */}
-      <View style={{ flex: 1 }}>{renderScene()}</View>
+    // Hàm điều hướng đến màn hình cá nhân (UserStack/ProfileStack)
+    const navigateToProfile = () => {
+        // Chuyển hướng đến Stack Profile
+        navigation.navigate('ProfileStack' as never); 
+    };
 
-      {/* BOTTOM NAVIGATION */}
-      <View style={styles.bottomBar}>
-        {routes.map((route, i) => {
-          const isActive = i === index;
-          return (
-            <Pressable
-              key={route.key}
-              onPress={() => setIndex(i)}
-              style={[styles.tabButton, isActive && styles.activeTab]}>
-              <MaterialCommunityIcons
-                name={route.icon}
-                size={isActive ? 28 : 24}
-                color={isActive ? Colors.white : '#bbb'}
-              />
-              <Text style={[styles.tabText, isActive && { color: Colors.white }]}>
-                {route.title}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </View>
-    </SafeAreaView>
-  );
+    const navigateToNotifications = () => {
+        // Giả định bạn có màn hình Notifications trong RootStack
+        navigation.navigate('NotificationScreen' as never); 
+    };
+
+    return (
+        // Dùng View thay vì SafeAreaView ở đây, để RootStack quản lý SafeArea cho Header
+        <View style={styles.container}> 
+            {/* --- CUSTOM APPBAR/HEADER --- */}
+            <SafeAreaView style={styles.appBarContainer}>
+                <View style={styles.appBar}>
+                    {/* Logo CLB Ninh Bình */}
+                    <Image source={images.nbfc} style={styles.logo} />
+                    
+                    <View style={styles.spacer} />
+                    
+                    {/* Icon Tài khoản cá nhân */}
+                    <Pressable onPress={navigateToProfile} style={styles.iconCircle}>
+                        <MaterialCommunityIcons name="account-circle-outline" size={24} color={Colors.white} />
+                    </Pressable>
+
+                    {/* Icon Thông báo */}
+                    <Pressable onPress={navigateToNotifications} style={styles.iconCircle}>
+                        <MaterialCommunityIcons name="bell-outline" size={24} color={Colors.white} />
+                    </Pressable>
+                </View>
+            </SafeAreaView>
+
+
+            {/* --- BOTTOM TAB NAVIGATOR (React Navigation) --- */}
+            <Tab.Navigator
+                initialRouteName="home"
+                screenOptions={({ route }) => ({
+                    // Mặc định ẩn Header vì đã có Appbar tùy chỉnh
+                    headerShown: false, 
+                    tabBarActiveTintColor: Colors.primaryRed || '#FF0000',
+                    tabBarInactiveTintColor: Colors.gray,
+                    tabBarStyle: styles.tabBarStyle,
+                    tabBarLabelStyle: styles.tabBarLabelStyle,
+                    tabBarIcon: ({ focused, color, size }) => getTabBarIcon(route.name as keyof MainTabParamList, focused, color, size),
+                })}
+            >
+                {routesConfig.map((route) => (
+                    <Tab.Screen 
+                        key={route.key}
+                        name={route.key as keyof MainTabParamList}
+                        component={route.component} // Component là các Stack Navigator con
+                        options={{ tabBarLabel: route.title }}
+                    />
+                ))}
+            </Tab.Navigator>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.gray1 },
-
-  appBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-      alignItems: 'center',
-    backgroundColor: Colors.maroon,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    elevation: 5,
-  },
-
-  logo: { 
-    width: 50, 
-    height: 50, 
-    resizeMode: 'contain',
-    backgroundColor: Colors.black,
+    container: { 
+        flex: 1, 
+        backgroundColor: Colors.gray1 
+    },
     
-    padding: 8,
-    borderRadius: 50 },
+    // --- APP BAR STYLES ---
+    appBarContainer: {
+        backgroundColor: Colors.maroon, // Màu nền cho SafeArea
+    },
+    appBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: Colors.maroon,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        elevation: 5,
+    },
+    logo: {
+        width: 40,
+        height: 40,
+        resizeMode: 'contain',
+        marginRight: 10,
+        backgroundColor: Colors.white,
+        borderRadius: 20,
+        padding: 5,
+    },
+    spacer: {
+        flex: 1,
+    },
+    iconCircle: {
+        backgroundColor: '#ffffff33',
+        padding: 8,
+        borderRadius: 20,
+        marginLeft: 10,
+    },
 
-  iconCircle: {
-    
-    alignSelf: 'flex-end',
-    backgroundColor: '#ffffff33',
-    padding: 8,
-    borderRadius: 20,
-    
-  },
-
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: Colors.maroon,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingBottom: 10,
-    paddingTop: 6,
-    elevation: 10,
-  },
-
-  tabButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingVertical: 5,
-  },
-
-  activeTab: {
-    backgroundColor: '#ffffff22',
-    borderRadius: 12,
-  },
-
-  tabText: {
-    fontSize: 12,
-    color: '#bbb',
-    marginTop: 2,
-  },
+    // --- BOTTOM BAR STYLES ---
+    tabBarStyle: {
+        backgroundColor: Colors.maroon,
+        borderTopWidth: 0,
+        height: 60,
+        paddingBottom: 5,
+        paddingTop: 5,
+    },
+    tabBarLabelStyle: {
+        fontSize: 11,
+        fontWeight: '700',
+        color: Colors.white,
+        marginBottom: 2,
+    },
 });
 
 export default MainTabNavigator;

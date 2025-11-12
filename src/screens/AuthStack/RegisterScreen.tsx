@@ -9,7 +9,7 @@ import { ActivityIndicator, TextInput } from 'react-native-paper'
 import RoundedButton from '../../components/buttons/roundedButton'
 import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
 
-const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = ({navigation}) => {
+const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [password2,setPassword2] = useState('');
@@ -22,11 +22,12 @@ const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = ({navigation}
 
 
     try{
-      await getAuth().createUserWithEmailAndPassword(email,password),
-     Alert.alert(
+      await getAuth().createUserWithEmailAndPassword(email,password);
+      Alert.alert(
         'Tạo tài khoản thành công!'
       );
-      navigation.navigate('Main') 
+      // Navigation sẽ tự động chuyển sang MainTabs khi auth state thay đổi
+      // Nếu cần navigate thủ công, dùng: navigation.getParent()?.navigate('MainTabs', { screen: 'home' });
       
     }catch(error: any){
       console.error('Firebase register error:', error);

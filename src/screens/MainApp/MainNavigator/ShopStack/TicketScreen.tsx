@@ -1,4 +1,4 @@
-import {  Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 const TicketScreen = () => {
@@ -11,3 +11,4 @@ const TicketScreen = () => {
 
 export default TicketScreen
 
+const styles = StyleSheet.create({})

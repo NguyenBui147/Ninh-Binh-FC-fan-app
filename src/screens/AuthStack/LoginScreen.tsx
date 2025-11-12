@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
 

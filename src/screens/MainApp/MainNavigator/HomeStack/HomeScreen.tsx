@@ -3,7 +3,7 @@ import React from 'react'
 import { Text } from 'react-native-paper'
 
 
-const MainScreen = () => {
+const HomeScreen = () => {
   return (
     <View>
       <Text variant="displayLarge">Display Large</Text>
@@ -13,4 +13,4 @@ const MainScreen = () => {
   )
 }
 
-export default MainScreen
+export default HomeScreen
