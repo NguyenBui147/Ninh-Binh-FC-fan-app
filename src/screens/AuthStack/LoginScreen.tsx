@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, IconButton, TextInput } from 'react-native-paper';
-
 import { getAuth } from '@react-native-firebase/auth';
 
-import RoundedButton from '../../components/buttons/roundedButton';
-import LinkText from '../../components/texts/linkText';
 import Colors from '../../assets/colors/colors';
 import { images } from '../../assets/index';
 import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
+import { fonts } from '../../assets/index';
+import { Buttons } from '../../components';
 
 const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -55,7 +54,6 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
         
         <View style={styles.inputContainer}>
           <TextInput
-            
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
@@ -63,7 +61,8 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
             mode="outlined"
             keyboardType="email-address"
             autoCapitalize="none"
-            
+            outlineColor={Colors.black}      
+            activeOutlineColor={Colors.black}       
           />
           <TextInput
             placeholder="Mật khẩu"
@@ -72,6 +71,8 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
             secureTextEntry={!passwordVisible}
             style={styles.input}
             mode="outlined"
+            outlineColor={Colors.black}      
+            activeOutlineColor={Colors.black}   
             right={
               <TextInput.Icon
                 icon={passwordVisible ? 'eye-off' : 'eye'}
@@ -84,19 +85,20 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
         {loading ? (
           <ActivityIndicator size="large" color={Colors.black} />
         ) : (
-          <RoundedButton
-            text="Đăng nhập"
-            backgroundImageSource=""
-            backgroundColor={Colors.darkNavy}
-            onPress={handleLogin}
-          />
+          <View style={styles.buttonContainer}>
+
+            <Buttons.Button2
+              text="Đăng nhập"
+              backgroundColor={Colors.black}
+              onPress={handleLogin}
+            />
+            <Buttons.Button2
+              text="Đăng ký"
+              backgroundColor={Colors.black}
+              onPress={handleRegister}
+            />
+          </View>
         )}
-
-        <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>Bạn chưa có tài khoản? </Text>
-          <LinkText text="Đăng ký ngay" onPress={handleRegister} />
-        </View>
-
         <View style={styles.footer}>
           <Text style={styles.footerTitle}>Hoặc đăng nhập bằng</Text>
           <View style={styles.socialContainer}>
@@ -133,8 +135,8 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: Colors.maroon,
-    color:Colors.yellow,
+    backgroundColor: Colors.white,
+    color:Colors.brightYellow,
   },
   container: {
     flex: 1,
@@ -150,24 +152,24 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     alignSelf:'center',
-
   },
   title: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: Colors.yellow,
+    fontFamily:'sans-serif-condensed',
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: Colors.textHeaderOpacity60,
     textAlign: 'center',
     paddingBottom: 20,
   },
   subtitle: {
-    fontSize: 16,
-    
-    color: Colors.yellow,
+    fontSize: 18,
+    color: Colors.black,
     textAlign: 'center',
     marginBottom: 32,
   },
   inputContainer: {
-    backgroundColor:Colors.darkNavy,
+    backgroundColor:Colors.black,
+    borderRadius: 10,
     padding:20,
     width: '100%',
     marginBottom: 24,
@@ -177,10 +179,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: Colors.white,
   },
+  buttonContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   registerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 16,
+    gap: 10,              
   },
   registerText: {
     color: Colors.black,

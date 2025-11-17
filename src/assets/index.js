@@ -7,3 +7,9 @@ export const icons ={
 export const images={
     nbfc: require('./images/nbfclogo.png')
 }
+
+export const fonts={
+    fontFamily:'Montserrat-Regular',
+    fontFamilyBold:'Montserrat-Bold',
+    fontFamilyBoldMontserrat: 'Montserrat-Bold 700',
+}

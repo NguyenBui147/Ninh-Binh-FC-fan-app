@@ -14,6 +14,7 @@ const Colors = {
   primaryRed: '#F1194D',
   maroon:'rgb(191, 9, 47)',
   yellow:'rgb(244, 247, 84)',
+  brightYellow:'#FFEA19',
   textHeader: '#07283D',
   textHeaderOpacity10: '#07283D1A',
   textHeaderOpacity20: '#07283D33',

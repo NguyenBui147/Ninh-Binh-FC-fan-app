@@ -1,33 +1,22 @@
-import { StyleSheet, Text, View, ActivityIndicator, Pressable } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import React from 'react';
 import { RootStackScreensProps } from '../navigation/NavigationTypes';
 import Colors from '../assets/colors/colors';
 
+
+
 type SplashScreenProps = RootStackScreensProps<'Splash'>;
 
-const SplashScreen: React.FC<SplashScreenProps> = ({ navigation }) => {
-  
-  const handlePress = () => {
-    navigation.replace('AuthStack');
-  };
-  const SimpleContinueButton = () => (
-    <Pressable
-      style={styles.button}
-      onPress={handlePress}
-    >
-      <Text style={styles.buttonText}>Tiếp tục</Text>
-    </Pressable>
-  );
+const SplashScreen: React.FC<SplashScreenProps> = () => {
 
   return (
     <View style={styles.container}>
-      {/* Logo/Icon CLB */}
-      <ActivityIndicator size="large" color={Colors.primaryRed || '#FF0000'} style={styles.spinner} />
       
       <Text style={styles.title}>CLB NINH BÌNH FC</Text>
       <Text style={styles.subtitle}>Sẵn sàng đồng hành cùng đội bóng</Text>
+      <ActivityIndicator size="large" color={Colors.maroon} style={styles.spinner} />
 
-      <SimpleContinueButton />
+      
       
     </View>
   );
@@ -56,16 +45,5 @@ const styles = StyleSheet.create({
       color: Colors.gray,
       marginBottom: 50,
   },
-  button: {
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    borderRadius: 8,
-    backgroundColor: Colors.blue || '#007AFF', // Màu nền nút
-    elevation: 3,
-  },
-  buttonText: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
-  }
+
 });

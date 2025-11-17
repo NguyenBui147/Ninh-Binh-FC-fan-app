@@ -21,11 +21,10 @@ import { MainTabParamList } from './NavigationTypes';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
-// --- Khai báo hằng số ---
 const routesConfig: { key: keyof MainTabParamList; title: string; icon: [string, string]; component: React.ComponentType<any> }[] = [
-    { key: 'home', title: 'Trang chủ', icon: ['home-outline', 'home'], component: HomeStack },
     { key: 'news', title: 'Tin tức', icon: ['newspaper-variant-outline', 'newspaper-variant'], component: NewsStack },
     { key: 'shop', title: 'Cửa hàng', icon: ['store-outline', 'store'], component: ShopStack },
+    { key: 'home', title: 'Trang chủ', icon: ['home-outline', 'home'], component: HomeStack },
     { key: 'matches', title: 'Lịch thi đấu', icon: ['calendar-outline', 'calendar'], component: ScheduleStack },
     { key: 'profile', title: 'Cộng đồng', icon: ['account-group-outline', 'account-group'], component: ProfileStack },
 ];
@@ -44,34 +43,25 @@ const MainTabNavigator = () => {
         return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
     };
 
-    // Hàm điều hướng đến màn hình cá nhân (UserStack/ProfileStack)
+  
     const navigateToProfile = () => {
-        // Chuyển hướng đến Stack Profile
         navigation.navigate('ProfileStack' as never); 
     };
 
     const navigateToNotifications = () => {
-        // Giả định bạn có màn hình Notifications trong RootStack
+        
         navigation.navigate('NotificationScreen' as never); 
     };
 
     return (
-        // Dùng View thay vì SafeAreaView ở đây, để RootStack quản lý SafeArea cho Header
         <View style={styles.container}> 
-            {/* --- CUSTOM APPBAR/HEADER --- */}
             <SafeAreaView style={styles.appBarContainer}>
                 <View style={styles.appBar}>
-                    {/* Logo CLB Ninh Bình */}
                     <Image source={images.nbfc} style={styles.logo} />
-                    
                     <View style={styles.spacer} />
-                    
-                    {/* Icon Tài khoản cá nhân */}
                     <Pressable onPress={navigateToProfile} style={styles.iconCircle}>
                         <MaterialCommunityIcons name="account-circle-outline" size={24} color={Colors.white} />
                     </Pressable>
-
-                    {/* Icon Thông báo */}
                     <Pressable onPress={navigateToNotifications} style={styles.iconCircle}>
                         <MaterialCommunityIcons name="bell-outline" size={24} color={Colors.white} />
                     </Pressable>
@@ -83,9 +73,8 @@ const MainTabNavigator = () => {
             <Tab.Navigator
                 initialRouteName="home"
                 screenOptions={({ route }) => ({
-                    // Mặc định ẩn Header vì đã có Appbar tùy chỉnh
                     headerShown: false, 
-                    tabBarActiveTintColor: Colors.primaryRed || '#FF0000',
+                    tabBarActiveTintColor: Colors.maroon,
                     tabBarInactiveTintColor: Colors.gray,
                     tabBarStyle: styles.tabBarStyle,
                     tabBarLabelStyle: styles.tabBarLabelStyle,
@@ -96,7 +85,7 @@ const MainTabNavigator = () => {
                     <Tab.Screen 
                         key={route.key}
                         name={route.key as keyof MainTabParamList}
-                        component={route.component} // Component là các Stack Navigator con
+                        component={route.component} 
                         options={{ tabBarLabel: route.title }}
                     />
                 ))}
@@ -122,7 +111,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.maroon,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        elevation: 5,
     },
     logo: {
         width: 40,
@@ -145,7 +133,7 @@ const styles = StyleSheet.create({
 
     // --- BOTTOM BAR STYLES ---
     tabBarStyle: {
-        backgroundColor: Colors.maroon,
+        backgroundColor: Colors.darkNavy,
         borderTopWidth: 0,
         height: 60,
         paddingBottom: 5,

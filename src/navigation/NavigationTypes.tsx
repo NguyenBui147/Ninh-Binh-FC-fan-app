@@ -5,7 +5,7 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 // ROOT STACK
 export type RootStackParamList = {
-    AuthStack: undefined;
+    AuthStack: { screen?: keyof AuthStackParamList; params?: any };
     MainTabs: undefined;
     Splash: undefined;
 }

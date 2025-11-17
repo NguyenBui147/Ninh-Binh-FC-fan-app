@@ -1,5 +1,5 @@
 {
   "extends": "@react-native/typescript-config",
-  "include": ["**/*.ts", "**/*.tsx", "src/components/input/customInpit1.js", "src/components/buttons/outlinedBtn.js", "src/navigation/MainTab.js", "src/assets/icons/index.js", "src/components/navigationBars/curvedBottomBar.js", "src/components/navigationBars/curvedBottomBar.jsx"],
+  "include": ["**/*.ts", "**/*.tsx", "src/components/input/customInpit1.js", "src/components/buttons/outlinedBtn.js", "src/navigation/MainTab.js", "src/assets/icons/index.js", "src/components/navigationBars/curvedBottomBar.js", "src/components/navigationBars/curvedBottomBar.jsx", "src/components/header/BannerSlider.js"],
   "exclude": ["**/node_modules", "**/Pods"]
 }
