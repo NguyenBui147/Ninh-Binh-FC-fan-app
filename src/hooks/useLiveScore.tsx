@@ -21,7 +21,8 @@ interface ScoreBoardData {
   awayTeamScore: number;
   matchDateTime: string;
   stadium: string;
-  time: FirebaseFirestoreTypes.Timestamp; // Thời gian bắt đầu trận đấu
+  time:string;
+  formattedTime: FirebaseFirestoreTypes.Timestamp; // Thời gian bắt đầu trận đấu
 }
 
 // Kiểu dữ liệu đã xử lý để component sử dụng
@@ -78,9 +79,7 @@ export const useLiveScore = () => {
             : `${data.homeTeamScore} - ${data.awayTeamScore}`,
           stadium: data.stadium,
           
-          startTime: data.time.toDate(), // Chuyển Timestamp sang Date
-        //   matchDate: data.matchDateTime, 
-        //   liveMatchTime: data.liveMatchTime, 
+          startTime: data.formattedTime?.toDate(),
         };
         
         setMatch(boardData);
@@ -95,22 +94,18 @@ export const useLiveScore = () => {
     return () => subscriber();
   }, []);
   useEffect(() => {
-    // Nếu không có trận đấu
+
     if (!match) {
-      setDisplayTime(''); // Xóa thời gian
+      setDisplayTime(''); 
       return;
     }
-
-    // Nếu trận đấu SẮP DIỄN RA
     if (match.status === 'upcoming') {
-      // Chỉ hiển thị giờ bắt đầu (theo yêu cầu của bạn)
       const date = match.startTime;
-      const timeString = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
-      setDisplayTime(`Hôm nay, ${timeString}`);
-      return; // Dừng, không cần interval
+      const timeString =
+      `${String(date.getDate())}/${String(date.getMonth())} | ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+      setDisplayTime(`Trận đấu tiếp theo\n ${timeString}`);
+      return; 
     }
-
-    // Nếu trận đấu ĐÃ KẾT THÚC (dù query đã lọc, nhưng để dự phòng)
     if (match.status === 'finished') {
       setDisplayTime('KẾT THÚC');
       return;

@@ -12,19 +12,37 @@ const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
   return (
     <ScrollView style={{flex:1,backgroundColor:Colors.white}}>
       <Sliders.BannerSlider />
+      
       <View style={styles.container}>
-        
-        <LiveScoreBoard/>
-      </View>
+        <View>
+          <Text style={styles.segmentText}>TRẬN ĐẤU TRỰC TIẾP </Text>
+        </View>
+          <LiveScoreBoard/>
+
+        <View>
+          <Text style={styles.segmentText}>SỰ KIỆN NỔI BẬT </Text>
+        </View>
+
+
+        </View>
+
     </ScrollView>
   )
 }
+
 
 const styles = StyleSheet.create({
   container:{
     flex:1,
     margin:18,
-  }
+  },
+  segmentText:{
+    fontFamily:'Manrope-ExtraBold',
+    fontSize:16,
+    marginVertical:10,
+    fontWeight: 'bold',
+    color:Colors.darkNavy
+  },
 
 })
 export default HomeScreen

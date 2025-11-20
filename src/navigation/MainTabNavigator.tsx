@@ -16,6 +16,7 @@ import ProfileStack from './Screen Stacks/ProfileStack';
 import Colors from '../assets/colors/colors';
 import { images } from '../assets';
 import { MainTabParamList } from './NavigationTypes'; 
+import { Text } from 'react-native-gesture-handler';
 
 
 
@@ -58,6 +59,7 @@ const MainTabNavigator = () => {
             <SafeAreaView style={styles.appBarContainer}>
                 <View style={styles.appBar}>
                     <Image source={images.nbfc} style={styles.logo} />
+                    <Text style={styles.headerText}>NBFC</Text>
                     <View style={styles.spacer} />
                     <Pressable onPress={navigateToProfile} style={styles.iconCircle}>
                         <MaterialCommunityIcons name="account-circle-outline" size={24} color={Colors.white} />
@@ -130,8 +132,13 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: 10,
     },
-
-    // --- BOTTOM BAR STYLES ---
+    headerText:{
+        fontSize:30,
+        fontWeight:800,
+        color:Colors.brightYellow,
+        
+    },
+  
     tabBarStyle: {
         backgroundColor: Colors.darkNavy,
         borderTopWidth: 0,

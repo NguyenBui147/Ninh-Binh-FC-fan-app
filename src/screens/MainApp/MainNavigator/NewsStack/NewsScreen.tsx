@@ -1,4 +1,5 @@
-import {  Text, View } from 'react-native'
+import {  Text, View, useWindowDimensions } from 'react-native'
+import RenderHtml from 'react-native-render-html'
 import React from 'react'
 
 const NewsScreen = () => {
