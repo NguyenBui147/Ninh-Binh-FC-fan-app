@@ -94,7 +94,6 @@ export const useLiveScore = () => {
     return () => subscriber();
   }, []);
   useEffect(() => {
-
     if (!match) {
       setDisplayTime(''); 
       return;
@@ -110,8 +109,6 @@ export const useLiveScore = () => {
       setDisplayTime('KẾT THÚC');
       return;
     }
-
-    // Nếu trận đấu ĐANG DIỄN RA (LIVE)
     if (match.status === 'live') {
       const calculateMatchTime = () => {
         const startTimeMs = match.startTime.getTime();

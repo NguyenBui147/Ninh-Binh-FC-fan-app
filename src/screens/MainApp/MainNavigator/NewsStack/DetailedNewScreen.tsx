@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: Colors.white,
   },
   date: {
-    color: 'gray',
+    color: Colors.gray,
     fontSize: 14,
   },
   source: {
