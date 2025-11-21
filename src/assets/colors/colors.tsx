@@ -13,6 +13,7 @@ const Colors = {
   teal:'rgb(59, 151, 151)',
   primaryRed: '#F1194D',
   maroon:'rgb(191, 9, 47)',
+  gradientOrange:'#FAD126',
   yellow:'rgb(244, 247, 84)',
   brightYellow:'#FFEA19',
   textHeader: '#07283D',

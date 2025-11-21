@@ -135,7 +135,11 @@ const styles = StyleSheet.create({
     headerText:{
         fontSize:30,
         fontWeight:800,
-        color:Colors.brightYellow,
+        color:Colors.gradientOrange,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
         
     },
   

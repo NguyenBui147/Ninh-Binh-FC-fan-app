@@ -53,7 +53,7 @@ export type HomeStackScreensProps<T extends keyof HomeStackParamList> =
 // NEWS STACK
 export type NewsStackParamList = {
     News: undefined;
-    DetailedNews: undefined;
+    DetailedNews:{id : string} ;
 }
 
 export type NewsStackScreensProps<T extends keyof NewsStackParamList> = 

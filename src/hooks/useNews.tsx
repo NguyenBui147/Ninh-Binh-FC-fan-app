@@ -41,14 +41,14 @@ export const useNews = (pageSize = 10) => {
       if (isLoadMore && lastDocRef.current) {
         q = query(
           newsRef,
-          orderBy('publishedAt', 'desc'),
+          orderBy('publishedAt', 'asc'),
           startAfter(lastDocRef.current), 
           limit(pageSize)
         );
       } else {
         q = query(
           newsRef,
-          orderBy('publishedAt', 'desc'),
+          orderBy('publishedAt', 'asc'),
           limit(pageSize)
         );
       }
@@ -65,7 +65,6 @@ export const useNews = (pageSize = 10) => {
         } else {
           setNews(fetchedNews);
         }
-        // Cập nhật lastDoc vào Ref
         lastDocRef.current = snapshot.docs[snapshot.docs.length - 1];
         if (snapshot.docs.length < pageSize) {
           setHasMore(false);
@@ -94,7 +93,7 @@ export const useNews = (pageSize = 10) => {
   const onRefresh = useCallback(() => {
     setIsRefreshing(true);
     setHasMore(true);
-    lastDocRef.current = null; // Reset ref khi refresh
+    lastDocRef.current = null;
     fetchNews(false);
   }, [fetchNews]);
 
