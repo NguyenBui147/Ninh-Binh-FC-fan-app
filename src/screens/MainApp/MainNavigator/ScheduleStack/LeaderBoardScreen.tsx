@@ -1,8 +1,9 @@
 import { Text, View,ActivityIndicator, StyleSheet } from 'react-native'
 import React from 'react'
-import { leaderboard } from '../../../../components'
+import { Board } from '../../../../components'
 import { useStanding } from '../../../../hooks/useStanding'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Colors from '../../../../assets/colors/colors'
 
 
 const LeaderBoardScreen = () => {
@@ -10,7 +11,7 @@ const LeaderBoardScreen = () => {
   if (loading) {
       return (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color={Colors.primaryRed} />
           <Text style={{ marginTop: 10 }}>Đang tải bảng xếp hạng...</Text>
         </View>
       );
@@ -25,7 +26,7 @@ const LeaderBoardScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <leaderboard.LeaderBoard data={standings}/>
+      <Board.LeaderBoard data={standings}/>
     </SafeAreaView>
   )
 }

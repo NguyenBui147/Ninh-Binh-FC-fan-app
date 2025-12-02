@@ -4,13 +4,12 @@ import {
   Text, 
   FlatList, 
   Image, 
-  ActivityIndicator, 
   StyleSheet, 
 
 } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useStanding, TeamStanding } from '../../hooks/useStanding';
+import { TeamStanding } from '../../hooks/useStanding';
 import Colors from '../../assets/colors/colors';
 
 interface StandingProps {
@@ -108,15 +107,13 @@ const LeaderBoard:React.FC<StandingProps> =({data}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: Colors.white,
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
-  // --- ROW STYLES ---
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -131,33 +128,29 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#dee2e6',
   },
-  
-  // --- COLUMNS ---
-  // Điều chỉnh flex để chia tỷ lệ cột cho cân đối
   colRank: {
     width: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   colTeam: {
-    flex: 1, // Chiếm phần lớn không gian còn lại
+    flex: 1, 
     flexDirection: 'row',
     alignItems: 'center',
     paddingRight: 5,
   },
   colStats: {
-    width: 32, // Cố định chiều rộng cho các cột số liệu
+    width: 32, 
     alignItems: 'center',
     justifyContent: 'center',
   },
   colForm: {
-    width: 90, // Đủ rộng cho 5 hình tròn
+    width: 90, 
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 3,
   },
 
-  // --- TEXT STYLES ---
   headerText: {
     fontWeight: 'bold',
     fontSize: 12,
@@ -180,10 +173,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '600',
     color: '#343a40',
-    flex: 1, // Để text tự xuống dòng hoặc ... nếu quá dài
+    flex: 1, 
   },
-
-  // --- COMPONENTS ---
   logo: {
     width: 24,
     height: 24,
@@ -201,10 +192,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.green, 
   },
   bottomRank: {
-    backgroundColor: '#e03131', // Màu đỏ cho nhóm cầm đèn đỏ
+    backgroundColor:Colors.primaryRed,
   },
-  
-
   FormItem: {
     width: 14,
     height: 14,

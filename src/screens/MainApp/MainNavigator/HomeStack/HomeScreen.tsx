@@ -5,7 +5,7 @@ import Colors from '../../../../assets/colors/colors';
 import { HomeStackScreensProps } from '../../../../navigation/NavigationTypes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Sliders } from '../../../../components';
-import LiveScoreBoard from '../../../../components/LiveScoreBoard';
+import { Board } from '../../../../components';
 
 const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
 
@@ -17,7 +17,7 @@ const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
         <View>
           <Text style={styles.segmentText}>TRẬN ĐẤU TRỰC TIẾP </Text>
         </View>
-          <LiveScoreBoard/>
+          <Board.LiveScoreBoard/>
 
         <View>
           <Text style={styles.segmentText}>SỰ KIỆN NỔI BẬT </Text>

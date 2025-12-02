@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
 export interface TeamStats {
   played: number;
@@ -9,7 +9,6 @@ export interface TeamStats {
   gd : string;
   points: number;
 }
-
 export interface TeamStanding {
   id: string; 
   rank: number;
@@ -40,12 +39,11 @@ export const useStanding = () => {
               ...data,
             });
           });
-
           setStandings(list);
           setLoading(false);
         },
         (err) => {
-          console.error('Lỗi lấy BXH:', err);
+          console.error('Lỗi,không lấy được BXH:', err);
           setError(err);
           setLoading(false);
         }

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Colors from '../assets/colors/colors';
 
+
 const screenWidth = Dimensions.get('window').width;
 const itemWidth = screenWidth * 0.8;
 
@@ -36,11 +37,15 @@ export default NewsItemComponent
 const styles = StyleSheet.create({
   container:{
     flexDirection:'row',
+    borderRadius:18,
+    overflow:'hidden',
+    margin:12,
+    backgroundColor:Colors.white
   },
   
   contentContainer:{
     flex:1,
-    justifyContent:'space-between'
+    justifyContent:'space-between',
   },
   contentImage:{
     width:'100%',
@@ -48,7 +53,7 @@ const styles = StyleSheet.create({
     resizeMode:'cover'
   },
   titleText:{
-    fontWeight:600,
+    fontWeight:'600',
     color:Colors.black,
     padding:10
   },
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
   
   },
   dateText:{
-    fontWeight:400,
+    fontWeight:'400',
     fontSize: 14,
     color: Colors.darkNavy,
   },

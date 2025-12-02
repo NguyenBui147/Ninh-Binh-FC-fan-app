@@ -1,4 +1,4 @@
-import LeaderBoard from './leaderboards/LeaderBoard';
+
 
 export const Buttons = {
     Button1: require('./buttons/button1').default,
@@ -8,6 +8,9 @@ export const Buttons = {
 export const Sliders = {
     BannerSlider: require('./header/BannerSlider').default,
 };
-export const leaderboard ={
-    LeaderBoard: require('./leaderboards/LeaderBoard').default
+export const Board ={
+    LeaderBoard: require('./boards/LeaderBoard').default,
+    LiveScoreBoard: require('./boards/LiveScoreBoard').default,
+    MatchesItem : require('./boards/MatchesBoardItem').default
+
 }

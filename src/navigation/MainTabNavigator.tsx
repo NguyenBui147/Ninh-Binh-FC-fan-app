@@ -32,8 +32,6 @@ const routesConfig: { key: keyof MainTabParamList; title: string; icon: [string,
 
 const MainTabNavigator = () => {
     const navigation = useNavigation();
-
-    // Hàm tùy chỉnh icon
     const getTabBarIcon = (routeName: keyof MainTabParamList, focused: boolean, color: string, size: number) => {
         const config = routesConfig.find(r => r.key === routeName);
         if (!config) return null;

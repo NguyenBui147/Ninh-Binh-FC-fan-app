@@ -6,7 +6,6 @@ import { NewsStackScreensProps } from '../../../../navigation/NavigationTypes'
 import Colors from '../../../../assets/colors/colors'
 
 const NewsScreen: React.FC<NewsStackScreensProps<'News'>> = () => {
-
   const { 
     news, 
     loading, 

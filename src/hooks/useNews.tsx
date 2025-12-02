@@ -25,19 +25,13 @@ export const useNews = (pageSize = 10) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  
-  // 2. Dùng useRef thay vì useState cho lastDoc để tránh re-render loop
   const lastDocRef = useRef<FirebaseFirestoreTypes.QueryDocumentSnapshot | null>(null);
 
-  // 3. Bao bọc fetchNews bằng useCallback
   const fetchNews = useCallback(async (isLoadMore = false) => {
     const db = getFirestore();
     const newsRef = collection(db, 'news');
-    
     try {
       let q;
-
-      // Logic Query
       if (isLoadMore && lastDocRef.current) {
         q = query(
           newsRef,
@@ -52,9 +46,7 @@ export const useNews = (pageSize = 10) => {
           limit(pageSize)
         );
       }
-
       const snapshot = await getDocs(q);
-
       if (!snapshot.empty) {
         const fetchedNews=snapshot.docs.map((doc: FirebaseFirestoreTypes.QueryDocumentSnapshot) => ({
           id: doc.id,

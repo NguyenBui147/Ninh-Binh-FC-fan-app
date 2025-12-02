@@ -1,15 +1,14 @@
-import React, { useState, useEffect, use } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
   Image,
   Text,
   Dimensions,
-  Pressable,
   ActivityIndicator,
 } from 'react-native';
-import { useLiveScore } from '../hooks/useLiveScore';
-import Colors from '../assets/colors/colors';
+import { useLiveScore } from '../../hooks/useLiveScore';
+import Colors from '../../assets/colors/colors';
 const { width } = Dimensions.get('window');
 
 const LiveScoreBoard = () => {
@@ -32,7 +31,7 @@ const LiveScoreBoard = () => {
     else{
         return (
         <View style={styles.container}>
-           <View style={styles.header}/>
+            <View style={styles.header}/>
             <View style={styles.statusRow}>
                 {match.status === 'live' ? (
                 <View style={styles.liveBadge}>
@@ -70,8 +69,8 @@ const LiveScoreBoard = () => {
 const styles = StyleSheet.create({
   container: {
     height: 140, 
-    width: '90%',
-    alignSelf: 'center',
+    width: width*0.9,
+    alignContent: 'center',
     backgroundColor: Colors.gray1,
     borderRadius: 10,
     overflow: 'hidden', 
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   header:{
     width: '100%',
@@ -129,8 +128,8 @@ const styles = StyleSheet.create({
   },
   scoreRowContainer: {
     flex: 1,
-    paddingHorizontal: 15,
-    paddingBottom: 15,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -142,8 +141,8 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   logo: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
     resizeMode: 'contain',
   },
   
