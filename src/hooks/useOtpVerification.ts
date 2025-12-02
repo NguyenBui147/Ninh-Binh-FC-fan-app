@@ -81,7 +81,6 @@ export const useOtpVerification = ({ confirmation }: OtpVerificationProps) => {
     }
   };
 
-  // 6. Trả về các giá trị và hàm mà UI cần
   return {
     code,
     setCode,

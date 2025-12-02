@@ -13,3 +13,4 @@ export const fonts={
     fontFamilyBold:'Montserrat-Bold',
     fontFamilyBoldMontserrat: 'Montserrat-Bold 700',
 }
+

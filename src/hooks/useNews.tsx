@@ -41,7 +41,7 @@ export const useNews = (pageSize = 10) => {
       if (isLoadMore && lastDocRef.current) {
         q = query(
           newsRef,
-          orderBy('publishedAt', 'asc'),
+          orderBy('publishedAt', 'desc'),
           startAfter(lastDocRef.current), 
           limit(pageSize)
         );
