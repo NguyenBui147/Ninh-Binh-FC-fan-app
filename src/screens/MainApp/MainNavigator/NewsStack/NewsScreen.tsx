@@ -54,7 +54,7 @@ const NewsScreen: React.FC<NewsStackScreensProps<'News'>> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.gray1,
+    backgroundColor: Colors.white,
   },
   center: {
     flex: 1,

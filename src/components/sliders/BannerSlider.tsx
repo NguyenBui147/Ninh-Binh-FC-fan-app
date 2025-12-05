@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     height: BANNER_HEIGHT,
     width,
     backgroundColor: Colors.gray1,
+    
   },
   loadingContainer: {
     justifyContent: 'center',

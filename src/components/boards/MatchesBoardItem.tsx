@@ -23,7 +23,7 @@ const MatchesBoard:React.FC<MatchProps> =({data}) => {
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>
-            {item.status} - {item.league} </Text>
+            {item.timeStr} - {item.league} </Text>
         </View>
         <View style={styles.contentContainer}>
           <View style={styles.teamContainer}>

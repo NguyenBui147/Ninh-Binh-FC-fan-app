@@ -42,7 +42,7 @@ export const useNews = (pageSize = 10) => {
       } else {
         q = query(
           newsRef,
-          orderBy('publishedAt', 'asc'),
+          orderBy('publishedAt', 'desc'),
           limit(pageSize)
         );
       }

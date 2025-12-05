@@ -5,7 +5,8 @@ export const icons ={
 };
 
 export const images={
-    nbfc: require('./images/nbfclogo.png')
+    nbfc: require('./images/nbfclogo.png'),
+    lpbank: require('./images/lpbanklogo.png')
 }
 
 export const fonts={

@@ -30,10 +30,8 @@ export const useStanding = () => {
       .onSnapshot(
         (querySnapshot) => {
           const list: TeamStanding[] = []; 
-          
           querySnapshot.forEach((documentSnapshot) => {
-            const data = documentSnapshot.data() as Omit <TeamStanding, 'id'>;
-            
+            const data = documentSnapshot.data() as Omit <TeamStanding, 'id'>;           
             list.push({
               id: documentSnapshot.id,
               ...data,

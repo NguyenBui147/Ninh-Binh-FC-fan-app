@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'; // Bỏ useCallback cho đơn giản
-import firestore from '@react-native-firebase/firestore';
+import { useState, useEffect } from 'react'; 
+import firestore, { getFirestore } from '@react-native-firebase/firestore';
+import { getApp } from '@react-native-firebase/app';
 
 export interface Match {
   id: string;
@@ -26,27 +27,24 @@ export const useMatches = () => {
 
   useEffect(() => {
     setLoading(true);
-
-    // Bắt đầu lắng nghe dữ liệu
-    const unsubscribe = firestore()
-      .collection('matches')
+    const unsubscribe = getFirestore()
+      .collection(('matches'))
       .orderBy('timeStamp', 'desc')
       .onSnapshot(
         (querySnapshot) => {
           const matchesData: Match[] = [];
-          
+          getApp
           querySnapshot.forEach((doc) => {
             const data = doc.data();
-            // Mapping dữ liệu an toàn
             matchesData.push({
-              id: doc.id, // Lấy ID thực của document
+              id: doc.id, 
               status: data.status || '',
-              awayTeam: data.awayName || data.awayTeam || '', // Fallback tên trường nếu khác nhau
+              awayTeam: data.awayName || data.awayTeam || '', 
               homeTeam: data.homeName || data.homeTeam || '',
               awayTeamLogo: data.awayLogo || data.awayTeamLogo || '',
               homeTeamLogo: data.homeLogo || data.homeTeamLogo || '',
               homeTeamScore: data.homeScore || 0,
-              homeTeamScorer: data.homeScorers || '', // Sửa lại tên trường cho khớp JSON bạn gửi trước đó
+              homeTeamScorer: data.homeScorers || '', 
               awayTeamScore: data.awayScore || 0,
               awayTeamScorer: data.awayScorers || '',
               league: data.league || '',
@@ -67,9 +65,9 @@ export const useMatches = () => {
         }
       );
 
-    // Cleanup function: Hủy lắng nghe khi component unmount
+
     return () => unsubscribe(); 
-  }, []); // Mảng rỗng để chạy 1 lần khi mount
+  }, []); 
 
   return { match, loading, error };
 };

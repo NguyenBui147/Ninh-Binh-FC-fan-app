@@ -5,9 +5,10 @@ import React, { useState } from 'react'
 
 import { getAuth } from '@react-native-firebase/auth';
 import Colors from '../../assets/colors/colors'
-import { ActivityIndicator, TextInput } from 'react-native-paper'
+import { ActivityIndicator, Button, TextInput } from 'react-native-paper'
 import RoundedButton from '../../components/buttons/roundedButton'
 import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
+import { Buttons } from '../../components';
 
 
 const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = () => {
@@ -80,11 +81,15 @@ const RegisterScreen:React.FC<AuthStackScreensProps<'Register'>> = () => {
         {loading?(
           <ActivityIndicator size={'large'} color={Colors.black}/>
         ):(
-          <RoundedButton
-            text="Đăng ký"
-            backgroundColor={Colors.black}
-            onPress={handleRegister}
-          />
+          <View style={{width: '50%' }}>
+
+            <Buttons.Button2 
+              text="Đăng ký"
+              color={Colors.white}
+              backgroundColor={Colors.maroon}
+              onPress={handleRegister}
+            />
+          </View>
         )}
       </View>
     </SafeAreaView>

@@ -25,12 +25,9 @@ interface ScoreBoardData {
   formattedTime: FirebaseFirestoreTypes.Timestamp;
 }
 
-// Kiểu dữ liệu đã xử lý
 export interface LiveScoreItem {
   id: string;
-  // statusFirestore: Trạng thái gốc từ DB để check 'finished'
   statusFirestore: 'live' | 'upcoming' | 'finished'; 
-  // derivedStatus: Trạng thái do client tự tính toán (để hiển thị UI)
   derivedStatus: 'live' | 'upcoming' | 'finished';
   awayTeam: string;
   homeTeam: string;

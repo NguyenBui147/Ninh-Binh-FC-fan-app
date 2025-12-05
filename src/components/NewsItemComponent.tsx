@@ -40,11 +40,15 @@ const styles = StyleSheet.create({
     borderRadius:18,
     overflow:'hidden',
     margin:12,
-    backgroundColor:Colors.white
+    elevation: 5,
+    shadowColor: Colors.black,
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
   },
   
   contentContainer:{
     flex:1,
+    backgroundColor:Colors.maroon,
     justifyContent:'space-between',
   },
   contentImage:{
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   },
   titleText:{
     fontWeight:'600',
-    color:Colors.black,
+    color:Colors.white,
     padding:10
   },
   bottomCotainer:{
@@ -65,6 +69,6 @@ const styles = StyleSheet.create({
   dateText:{
     fontWeight:'400',
     fontSize: 14,
-    color: Colors.darkNavy,
+    color: Colors.white,
   },
 })

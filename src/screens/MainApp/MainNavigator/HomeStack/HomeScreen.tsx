@@ -6,6 +6,7 @@ import { HomeStackScreensProps } from '../../../../navigation/NavigationTypes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Sliders } from '../../../../components';
 import { Board } from '../../../../components';
+import { Footers } from '../../../../components';
 
 const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
 
@@ -14,17 +15,21 @@ const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
       <Sliders.BannerSlider />
       
       <View style={styles.container}>
-        <View>
-          <Text style={styles.segmentText}>TRẬN ĐẤU TRỰC TIẾP </Text>
+        <View style={styles.sectionContainer}>
+          <Sliders.CardSlider/>
         </View>
+        <Text style={styles.segmentText}>TRẬN ĐẤU TRỰC TIẾP </Text>
+        <View>
           <Board.LiveScoreBoard/>
-
-        <View>
-          <Text style={styles.segmentText}>SỰ KIỆN NỔI BẬT </Text>
         </View>
-
-
+        <Text style={styles.segmentText}>MẠNG XÃ HỘI </Text>
+        
+        <View style={styles.sectionContainer}>
+          <Sliders.CardSlider/>
         </View>
+          <View style={{height:400}}></View>
+      </View>
+      <Footers.Footer1/>
 
     </ScrollView>
   )
@@ -36,10 +41,14 @@ const styles = StyleSheet.create({
     flex:1,
     margin:18,
   },
+  sectionContainer:{
+    borderRadius:12,
+    overflow:'hidden'
+  },
   segmentText:{
     fontFamily:'Manrope-ExtraBold',
-    fontSize:16,
-    marginVertical:10,
+    fontSize:20,
+    marginVertical:20,
     fontWeight: 'bold',
     color:Colors.darkNavy
   },

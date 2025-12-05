@@ -6,6 +6,7 @@ import RenderHTML from 'react-native-render-html';
 import { NewsStackParamList } from '../../../../navigation/NavigationTypes';
 import { NewsItem } from '../../../../hooks/useNews';
 import Colors from '../../../../assets/colors/colors';
+import { Footers } from '../../../../components';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -86,6 +87,7 @@ const DetailedNewsScreen = () => {
           enableExperimentalMarginCollapsing={true}
         />
       </View>
+      <Footers.Footer1/>
     </ScrollView>
   );
 };
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.white,
   },
   date: {
-    color: Colors.gray,
+    color: Colors.black,
     fontSize: 14,
   },
   source: {

@@ -34,6 +34,8 @@ export type MainTabParamList = {
     matches: undefined;
     social: undefined;
     profile: undefined;
+    player: undefined;
+
 }
 
 export type MainTabScreensProps<T extends keyof MainTabParamList> = 
@@ -83,13 +85,14 @@ export type ScheduleStackScreensProps<T extends keyof ScheduleStackParamList> =
     NativeStackScreenProps<ScheduleStackParamList, T>;
 
 
-// PROFILE STACK
-export type ProfileStackParamList = {
-    Profile: undefined;
+// Player STACK
+export type PlayerStackParamList = {
+    Player: undefined;
+    DetailedPlayer:undefined;
 }
 
-export type ProfileStackScreensProps<T extends keyof ProfileStackParamList> = 
-    NativeStackScreenProps<ProfileStackParamList, T>;
+export type PlayerStackScreensProps<T extends keyof PlayerStackParamList> = 
+    NativeStackScreenProps<PlayerStackParamList, T>;
 
 
 // MODAL STACK

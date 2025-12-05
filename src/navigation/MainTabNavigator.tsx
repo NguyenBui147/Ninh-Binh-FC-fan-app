@@ -10,8 +10,7 @@ import HomeStack from './Screen Stacks/HomeStack';
 import NewsStack from './Screen Stacks/NewsStack'; 
 import ShopStack from './Screen Stacks/ShopStack';
 import ScheduleStack from './Screen Stacks/ScheduleStack';
-import ProfileStack from './Screen Stacks/ProfileStack';
-
+import PlayerStack from './Screen Stacks/PlayerStack';
 // --- Import Constants ---
 import Colors from '../assets/colors/colors';
 import { images } from '../assets';
@@ -27,7 +26,7 @@ const routesConfig: { key: keyof MainTabParamList; title: string; icon: [string,
     { key: 'shop', title: 'Cửa hàng', icon: ['store-outline', 'store'], component: ShopStack },
     { key: 'home', title: 'Trang chủ', icon: ['home-outline', 'home'], component: HomeStack },
     { key: 'matches', title: 'Lịch thi đấu', icon: ['calendar-outline', 'calendar'], component: ScheduleStack },
-    { key: 'profile', title: 'Cộng đồng', icon: ['account-group-outline', 'account-group'], component: ProfileStack },
+    { key: 'player', title: 'Đội hình', icon: ['account-group-outline', 'account-group'], component: PlayerStack },
 ];
 
 const MainTabNavigator = () => {
@@ -43,9 +42,9 @@ const MainTabNavigator = () => {
     };
 
   
-    const navigateToProfile = () => {
-        navigation.navigate('ProfileStack' as never); 
-    };
+    // const navigateToProfile = () => {
+    //     navigation.navigate('ProfileStack' as never); 
+    // };
 
     const navigateToNotifications = () => {
         
@@ -59,7 +58,7 @@ const MainTabNavigator = () => {
                     <Image source={images.nbfc} style={styles.logo} />
                     <Text style={styles.headerText}>NBFC</Text>
                     <View style={styles.spacer} />
-                    <Pressable onPress={navigateToProfile} style={styles.iconCircle}>
+                    <Pressable style={styles.iconCircle}>
                         <MaterialCommunityIcons name="account-circle-outline" size={24} color={Colors.white} />
                     </Pressable>
                     <Pressable onPress={navigateToNotifications} style={styles.iconCircle}>
