@@ -7,12 +7,15 @@ export const Buttons = {
 
 export const Sliders = {
     BannerSlider: require('./sliders/BannerSlider').default,
-    CardSlider:require('./sliders/CardSlider').default
+    CardSlider:require('./sliders/CardSlider').default,
+    SocialSlider:require('./sliders/SocialSlider').default,
+    VideoSlider:require('./sliders/VideoSlider').default,
+    
 };
 export const Board ={
     LeaderBoard: require('./boards/LeaderBoard').default,
     LiveScoreBoard: require('./boards/LiveScoreBoard').default,
-    MatchesItem : require('./boards/MatchesBoardItem').default
+    MatchesItem : require('./boards/MatchesBoardItem').default,
 
 };
 

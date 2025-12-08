@@ -24,7 +24,7 @@ const MatchesScreen = () => {
     }  
 
   return(
-  <SafeAreaView style={styles.container}>
+  <SafeAreaView style={styles.container} edges={['left','right']}>
     <Board.MatchesItem data={match}/>
   </SafeAreaView>
   )

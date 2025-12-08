@@ -22,8 +22,8 @@ import Colors from '../../assets/colors/colors';
 import { FlatList, Text } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
-const CARD_HEIGHT = 200;
-const CARD_WIDTH  = width * 0.4;
+const CARD_HEIGHT = 180;
+const CARD_WIDTH  = width * 0.3;
 
 interface CardDocumentData {
   id: number;

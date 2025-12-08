@@ -22,8 +22,8 @@ import Colors from '../../assets/colors/colors';
 import { FlatList, Text } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
-const CARD_HEIGHT = 200;
-const CARD_WIDTH  = width * 0.4;
+const CARD_HEIGHT = 1000;
+
 
 interface CardDocumentData {
   id: number;
@@ -42,7 +42,7 @@ const SocialSlider = () => {
 
   useEffect(() => {
     const db = getFirestore();
-    const cardsRef = collection(db, 'cards');
+    const cardsRef = collection(db, 'social');
     const q = query(cardsRef, orderBy('id', 'asc'));
 
     const subscriber = onSnapshot(
@@ -92,7 +92,7 @@ const SocialSlider = () => {
         renderItem={({ item }) => (
         <View style={styles.card}>
           <Image source={{ uri: item.imgUrl }} style={styles.image} />
-           <View style={styles.overlay} >
+           <View style={styles.titleContainer} >
             <Text style={styles.titleText}>{item.title}</Text>
            </View>
         </View>
@@ -105,28 +105,24 @@ const SocialSlider = () => {
 const styles = StyleSheet.create({
   container: {
     height: CARD_HEIGHT,
-    width: width,
+    width: width*0.9,
     backgroundColor: Colors.white,
+    justifyContent:'center',
+    alignContent:'center'
   },
   loadingContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  slide: {
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
-  },
-  
   card: {
     flexDirection:'column',
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
+    height: 500,
     marginRight: 12,
     borderRadius: 12,
     overflow: 'hidden',
     backgroundColor: Colors.white,
     borderWidth:2,
-    borderColor:Colors.gray,
+    borderColor:Colors.black,
     
   },
   image: {
@@ -134,20 +130,21 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-  overlay: {
+  titleContainer:{
     position: 'absolute',
-    top: '80%',
-    left: 0,
-    right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.25)', 
-    alignItems:'center',
-    justifyContent:'center'
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 8,
+    alignItems: 'center',
+
   },
   titleText:{
     color: Colors.white,
     fontSize: 14,
     fontWeight: '400',
+    alignItems:'center',
+    justifyContent:'center'
   }
 });
 

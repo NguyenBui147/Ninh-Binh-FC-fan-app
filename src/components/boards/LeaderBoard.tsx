@@ -91,7 +91,7 @@ const LeaderBoard:React.FC<StandingProps> =({data}) => {
   
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}

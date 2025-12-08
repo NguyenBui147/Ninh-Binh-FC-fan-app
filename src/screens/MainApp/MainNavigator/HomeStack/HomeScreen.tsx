@@ -22,12 +22,13 @@ const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
         <View>
           <Board.LiveScoreBoard/>
         </View>
-        <Text style={styles.segmentText}>MẠNG XÃ HỘI </Text>
-        
-        <View style={styles.sectionContainer}>
-          <Sliders.CardSlider/>
-        </View>
-          <View style={{height:400}}></View>
+        {/* <View>
+          <Sliders.SocialSlider/>
+          </View> */}
+        <View>
+          <Text style={styles.segmentText}>MẠNG XÃ HỘI </Text>
+         <Sliders.VideoSlider/></View>
+        <View style={{height:400}}></View>
       </View>
       <Footers.Footer1/>
 

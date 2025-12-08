@@ -53,7 +53,7 @@ const MainTabNavigator = () => {
 
     return (
         <View style={styles.container}> 
-            <SafeAreaView style={styles.appBarContainer}>
+            <SafeAreaView style={styles.appBarContainer}  >
                 <View style={styles.appBar}>
                     <Image source={images.nbfc} style={styles.logo} />
                     <Text style={styles.headerText}>NBFC</Text>

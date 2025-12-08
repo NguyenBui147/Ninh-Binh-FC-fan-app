@@ -25,7 +25,7 @@ const LeaderBoardScreen = () => {
     }  
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['left','right']}>
       <Board.LeaderBoard data={standings}/>
     </SafeAreaView>
   )

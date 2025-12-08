@@ -54,7 +54,7 @@ const MatchesBoard:React.FC<MatchProps> =({data}) => {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['left','right']}>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}

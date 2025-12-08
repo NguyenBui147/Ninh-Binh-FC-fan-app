@@ -61,7 +61,7 @@ const PlayerListScreen = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['left','right']}>
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.id}

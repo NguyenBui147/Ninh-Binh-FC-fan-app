@@ -11,7 +11,7 @@ export default function ScheduleStack({ navigation }) {
     const [activeTab, setActiveTab] = useState('Matches');
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container} >
             <View style={styles.tabContainer}>
                 <TouchableOpacity
                     style={[
@@ -49,7 +49,7 @@ export default function ScheduleStack({ navigation }) {
                     <LeaderBoardScreen navigation={navigation} />
                 )}
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 
@@ -57,16 +57,16 @@ export default function ScheduleStack({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.white, 
+        overflow:'hidden'
     },
     tabContainer: {
         flexDirection: 'row',
         backgroundColor: Colors.maroon, 
-
+        overflow:'hidden'
     },
     tabButton: {
         flex: 1, 
-        paddingVertical: 12,
+        paddingVertical: 18,
         alignItems: 'center',
 
     },
