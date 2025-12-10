@@ -66,14 +66,35 @@ export type NewsStackScreensProps<T extends keyof NewsStackParamList> =
 export type ShopStackParamList = {
     Products: undefined;
     DetailedProducts: undefined;
-    Ticket: undefined;
-    DetailedTicket: undefined;
+    Tickets: undefined;
+    DetailedTickets: undefined;
     CheckOut: undefined;
 }
 
 export type ShopStackScreensProps<T extends keyof ShopStackParamList> = 
     NativeStackScreenProps<ShopStackParamList, T>;
 
+export type ProductsStackParamList = {
+    Products: undefined;
+    DetailedProducts: undefined;
+    Tickets: undefined;
+    DetailedTickets: undefined;
+    CheckOut: undefined;
+}
+
+export type ProductsStackScreensProps<T extends keyof ProductsStackParamList> = 
+    NativeStackScreenProps<ProductsStackParamList, T>;
+
+export type TicketsStackParamList = {
+    Products: undefined;
+    DetailedProducts: undefined;
+    Tickets: undefined;
+    DetailedTickets: undefined;
+    CheckOut: undefined;
+}
+
+export type TicketsStackScreensProps<T extends keyof TicketsStackParamList> = 
+    NativeStackScreenProps<TicketsStackParamList, T>;
 
 // SCHEDULE STACK
 export type ScheduleStackParamList = {

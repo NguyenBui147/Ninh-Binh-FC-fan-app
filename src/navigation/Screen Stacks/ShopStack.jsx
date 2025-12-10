@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import TicketsStack from './TicketsStack';
+import ProductsStack from './ProductsStack';
 
-import MatchesScreen from '../../screens/MainApp/MainNavigator/ScheduleStack/MatchesScreen';
-import LeaderBoardScreen from '../../screens/MainApp/MainNavigator/ScheduleStack/LeaderBoardScreen';
+import CheckOutScreen from '../../screens/MainApp/MainNavigator/ShopStack/CheckOutScreen';
+
 import Colors from '../../assets/colors/colors';
 
-export default function ScheduleStack({ navigation }) {
+export default function ShopStack({ navigation }) {
 
-    const [activeTab, setActiveTab] = useState('Matches');
+    const [activeTab, setActiveTab] = useState('Tickets');
 
     return (
         <View style={styles.container} >
@@ -16,37 +18,37 @@ export default function ScheduleStack({ navigation }) {
                 <Pressable
                     style={[
                         styles.tabButton,
-                        activeTab === 'Matches' && styles.activeTabButton
+                        activeTab === 'Products' && styles.activeTabButton
                     ]}
-                    onPress={() => setActiveTab('Matches')}
+                    onPress={() => setActiveTab('Products')}
                 >
                     <Text style={[
                         styles.tabText,
-                        activeTab === 'Matches' && styles.activeTabText
+                        activeTab === 'Products' && styles.activeTabText
                     ]}>
-                        Lịch thi đấu
+                        Sản phẩm
                     </Text>
                 </Pressable>
                 <Pressable
                     style={[
                         styles.tabButton,
-                        activeTab === 'LeaderBoard' && styles.activeTabButton
+                        activeTab === 'Tickets' && styles.activeTabButton
                     ]}
-                    onPress={() => setActiveTab('LeaderBoard')}
+                    onPress={() => setActiveTab('Tickets')}
                 >
                     <Text style={[
                         styles.tabText,
-                        activeTab === 'LeaderBoard' && styles.activeTabText
+                        activeTab === 'Tickets' && styles.activeTabText
                     ]}>
-                        BXH
+                        Vé trận đấu
                     </Text>
                 </Pressable>
             </View>
             <View style={styles.contentContainer}>
-                {activeTab === 'Matches' ? (
-                    <MatchesScreen navigation={navigation} />
+                {activeTab === 'Products' ? (
+                    <ProductsStack navigation={navigation} />
                 ) : (
-                    <LeaderBoardScreen navigation={navigation} />
+                    <TicketsStack navigation={navigation} />
                 )}
             </View>
         </View>

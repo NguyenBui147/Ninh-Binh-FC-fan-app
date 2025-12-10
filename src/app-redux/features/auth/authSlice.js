@@ -9,8 +9,6 @@ const initialState = {
   isAuthReady: false,
   loading: true,
 };
-
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,

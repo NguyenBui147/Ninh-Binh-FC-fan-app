@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Image,Dimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import firestore from '@react-native-firebase/firestore';
+import { getFirestore } from '@react-native-firebase/firestore';
 import RenderHTML from 'react-native-render-html';
 import { NewsStackParamList } from '../../../../navigation/NavigationTypes';
 import { NewsItem } from '../../../../hooks/useNews';
@@ -18,9 +18,9 @@ const DetailedNewsScreen = () => {
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const doc = await firestore().collection('news').doc(id).get() ;
+        const doc = await getFirestore().collection('news').doc(id).get() ;
         
-        if (doc.exists) {
+        if (doc) {
           setNewsDetail({ id: doc.id, ...doc.data() } as NewsItem);
         } else {
           console.log('Bài viết không tồn tại!');

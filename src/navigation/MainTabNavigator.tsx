@@ -68,7 +68,7 @@ const MainTabNavigator = () => {
             </SafeAreaView>
 
 
-            {/* --- BOTTOM TAB NAVIGATOR (React Navigation) --- */}
+            {/*BOTTOM TAB NAVIGATOR*/}
             <Tab.Navigator
                 initialRouteName="home"
                 screenOptions={({ route }) => ({
@@ -98,10 +98,8 @@ const styles = StyleSheet.create({
         flex: 1, 
         backgroundColor: Colors.gray1 
     },
-    
-    // --- APP BAR STYLES ---
     appBarContainer: {
-        backgroundColor: Colors.maroon, // Màu nền cho SafeArea
+        backgroundColor: Colors.maroon, 
     },
     appBar: {
         flexDirection: 'row',

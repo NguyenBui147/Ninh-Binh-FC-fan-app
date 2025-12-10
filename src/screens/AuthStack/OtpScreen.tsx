@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect,FC } from 'react';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet, Text, } from 'react-native';
+import {  SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { AuthStackScreensProps } from '../../navigation/NavigationTypes';
 import Colors from '../../assets/colors/colors';
@@ -10,7 +9,7 @@ import { useOtpVerification } from '../../hooks/useOtpVerification';
 
 type OtpScreenRouteProp = AuthStackScreensProps<'Otp'>['route'];
 
-const OtpScreen: FC<AuthStackScreensProps<'Otp'>> = ({ navigation }) => {
+const OtpScreen: React.FC<AuthStackScreensProps<'Otp'>> = ({ navigation }) => {
   const route = useRoute<OtpScreenRouteProp>();
   const { confirmationResult } = route.params || { confirmationResult: null };
 
