@@ -14,20 +14,19 @@ import { useCollection } from '../../hooks/useCollection';
 import Colors from '../../assets/colors/colors';
 
 const { width } = Dimensions.get('window');
-const BANNER_HEIGHT = 200;
+const BANNER_HEIGHT = 400;
 
 interface BannerItem {
   id: string;
   url: string; 
   order?: number;
 }
-
-const BannerSlider = () => {
+const ShopSlider = () => {
   const { data: banners, loading: isLoading, error } = useCollection<BannerItem>(
     'banner',
     {
       orderByField: 'order',
-      orderDirection: 'asc',
+      orderDirection: 'desc',
       limit: 3,
     }
   );
@@ -67,8 +66,6 @@ const BannerSlider = () => {
         loop
         index={0}
         pageSize={width}
-        pageIndicatorStyle={styles.dot}
-        activePageIndicatorStyle={styles.dotActive}
       >
         {banners.map(renderPage)}
       </Carousel>
@@ -80,7 +77,8 @@ const styles = StyleSheet.create({
   container: {
     height: BANNER_HEIGHT,
     width,
-    backgroundColor: Colors.gray1, 
+    backgroundColor: Colors.gray1,
+    position:'absolute' 
   },
   loadingContainer: {
     justifyContent: 'center',
@@ -110,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BannerSlider;
+export default ShopSlider;

@@ -5,6 +5,7 @@ const ModalScreen = () => {
   return (
     <View>
       <Text>ModalScreen</Text>
+      
     </View>
   )
 }

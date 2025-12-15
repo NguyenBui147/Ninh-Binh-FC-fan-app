@@ -10,7 +10,7 @@ import Colors from '../../assets/colors/colors';
 
 export default function ShopStack({ navigation }) {
 
-    const [activeTab, setActiveTab] = useState('Tickets');
+    const [activeTab, setActiveTab] = useState('Products');
 
     return (
         <View style={styles.container} >

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'; 
-import firestore, { getFirestore } from '@react-native-firebase/firestore';
+import  { getFirestore } from '@react-native-firebase/firestore';
 import { getApp } from '@react-native-firebase/app';
 
 export interface Match {

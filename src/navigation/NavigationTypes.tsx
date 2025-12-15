@@ -65,7 +65,7 @@ export type NewsStackScreensProps<T extends keyof NewsStackParamList> =
 // SHOP STACK
 export type ShopStackParamList = {
     Products: undefined;
-    DetailedProducts: undefined;
+    DetailedProducts: {products: Product};
     Tickets: undefined;
     DetailedTickets: undefined;
     CheckOut: undefined;
@@ -76,7 +76,7 @@ export type ShopStackScreensProps<T extends keyof ShopStackParamList> =
 
 export type ProductsStackParamList = {
     Products: undefined;
-    DetailedProducts: undefined;
+    DetailedProducts: {products: Product};
     Tickets: undefined;
     DetailedTickets: undefined;
     CheckOut: undefined;

@@ -1,5 +1,6 @@
 
 
+
 export const Buttons = {
     Button1: require('./buttons/button1').default,
     Button2: require('./buttons/roundedButton').default,
@@ -10,7 +11,7 @@ export const Sliders = {
     CardSlider:require('./sliders/CardSlider').default,
     SocialSlider:require('./sliders/SocialSlider').default,
     VideoSlider:require('./sliders/VideoSlider').default,
-    
+    ShopSlider: require('./sliders/ShopSlider').default,
 };
 export const Board ={
     LeaderBoard: require('./boards/LeaderBoard').default,

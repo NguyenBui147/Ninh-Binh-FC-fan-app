@@ -46,7 +46,7 @@ export const confirmPhoneOTP = async (verificationId, verificationCode) => {
 }
 
 
-//logout
+
 export const logoutUser= async () => {
     try {
         await signOut(auth);

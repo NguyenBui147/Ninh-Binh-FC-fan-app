@@ -1,19 +1,21 @@
 import {  StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Text } from 'react-native-paper'
+import { Button, Text } from 'react-native-paper'
 import Colors from '../../../../assets/colors/colors';
 import { HomeStackScreensProps } from '../../../../navigation/NavigationTypes';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Sliders } from '../../../../components';
 import { Board } from '../../../../components';
 import { Footers } from '../../../../components';
+import {Modals} from '../ModalStack';
+
 
 const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
 
   return (
     <ScrollView style={{flex:1,backgroundColor:Colors.white}}>
+      {/* <Modals.homeModal/> */}
       <Sliders.BannerSlider />
-      
       <View style={styles.container}>
         <View style={styles.sectionContainer}>
           <Sliders.CardSlider/>
@@ -29,6 +31,7 @@ const HomeScreen:React.FC<HomeStackScreensProps<"Home">> = () => {
           <Text style={styles.segmentText}>MẠNG XÃ HỘI </Text>
          <Sliders.VideoSlider/></View>
         <View style={{height:400}}></View>
+        <Button onPress={() => {use}}></Button>
       </View>
       <Footers.Footer1/>
 

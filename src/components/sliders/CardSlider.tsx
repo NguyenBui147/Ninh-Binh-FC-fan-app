@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from 'react';
+
 import {
   View,
   StyleSheet,
   Image,
   Dimensions,
-  Pressable,
   ActivityIndicator,
 } from 'react-native';
 
-
-import {
-  getFirestore,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  FirebaseFirestoreTypes
-} from '@react-native-firebase/firestore';
-
+import { useCollection } from '../../hooks/useCollection';
 import Colors from '../../assets/colors/colors';
 import { FlatList, Text } from 'react-native-gesture-handler';
 
@@ -25,11 +15,6 @@ const { width } = Dimensions.get('window');
 const CARD_HEIGHT = 180;
 const CARD_WIDTH  = width * 0.3;
 
-interface CardDocumentData {
-  id: number;
-  imgUrl: string;
-  title:string;
-}
 interface CardItem {
   id:string;
   imgUrl: string;
@@ -37,39 +22,13 @@ interface CardItem {
 }
 
 const CardSlider = () => {
-  const [Cards, setCards] = useState<CardItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const db = getFirestore();
-    const cardsRef = collection(db, 'cards');
-    const q = query(cardsRef, orderBy('id', 'asc'));
-
-    const subscriber = onSnapshot(
-      q,
-      (
-        querySnapshot: FirebaseFirestoreTypes.QuerySnapshot<CardDocumentData>
-      ) => {
-        const CardsData = querySnapshot.docs.map(
-          (documentSnapshot: FirebaseFirestoreTypes.QueryDocumentSnapshot<CardDocumentData>) => ({
-            id: documentSnapshot.id,
-            imgUrl: documentSnapshot.data().imgUrl,
-            title: documentSnapshot.data().title,
-            
-          })
-        );
-        setCards(CardsData);
-        setIsLoading(false);
-      },
-      (error: Error) => {
-        console.error("Lỗi tải Cards: ", error);
-        setIsLoading(false);
-      }
-    );
-
-    return () => subscriber();
-  }, []);
-
+  const { data: Cards, loading: isLoading, error } = useCollection<CardItem>(
+    'cards',
+    {
+      orderByField: 'id',
+      orderDirection: 'asc',
+    }
+  );
 
   if (isLoading) {
     return (
@@ -79,7 +38,13 @@ const CardSlider = () => {
     );
   }
 
+  if (error) {
+      console.log("Error loading slider:", error);
+      return <View style={styles.container} />; 
+    } 
+
   if (Cards.length === 0) {
+    console.log("No slider available");
     return <View style={styles.container} />;
   }
 
