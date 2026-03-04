@@ -9,8 +9,8 @@ export interface Match {
   homeTeam: string;
   awayTeamLogo: string;
   homeTeamLogo: string;
-  homeTeamScore: number; // Lưu ý: Check kỹ trên firebase là số hay chuỗi
-  homeTeamScorer: string; // Tên cầu thủ thường là string, bạn đang để number?
+  homeTeamScore: number; 
+  homeTeamScorer: string; 
   awayTeamScore: number;
   awayTeamScorer: string;
   league: string;

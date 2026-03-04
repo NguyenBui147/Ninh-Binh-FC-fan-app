@@ -12,6 +12,7 @@ import { RootStackParamList } from '../navigation/NavigationTypes';
 import { Provider } from 'react-redux';
 import { useAuth } from '../hooks/useAuth'; 
 import SplashScreen from '../screens/SplashScreen';
+import ProfileScreen from '../screens/MainApp/Profile/ProfileScreen';
 import { navigationRef, resetRoot } from './NavigationService'; 
 import { StyleSheet } from 'react-native'; 
 
@@ -39,6 +40,7 @@ const RootNavigator = () => {
         <RootStack.Screen name="Splash" component={SplashScreen} />
         <RootStack.Screen name="AuthStack" component={AuthNavigator} />
         <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
+        <RootStack.Screen name="Profile" component={ProfileScreen} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

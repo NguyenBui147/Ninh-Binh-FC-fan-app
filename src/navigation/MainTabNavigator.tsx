@@ -1,17 +1,14 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, StyleSheet, Image ,Pressable} from 'react-native';
+import { View, StyleSheet, Image ,Pressable, Alert} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-// --- Import các Stack con ---
 import HomeStack from './Screen Stacks/HomeStack'; 
 import NewsStack from './Screen Stacks/NewsStack'; 
 import ShopStack from './Screen Stacks/ShopStack';
 import ScheduleStack from './Screen Stacks/ScheduleStack';
 import PlayerStack from './Screen Stacks/PlayerStack';
-// --- Import Constants ---
 import Colors from '../assets/colors/colors';
 import { images } from '../assets';
 import { MainTabParamList } from './NavigationTypes'; 
@@ -31,6 +28,7 @@ const routesConfig: { key: keyof MainTabParamList; title: string; icon: [string,
 
 const MainTabNavigator = () => {
     const navigation = useNavigation();
+    const [notificationEnabled, setNotificationEnabled] = React.useState(false);
     const getTabBarIcon = (routeName: keyof MainTabParamList, focused: boolean, color: string, size: number) => {
         const config = routesConfig.find(r => r.key === routeName);
         if (!config) return null;
@@ -40,15 +38,17 @@ const MainTabNavigator = () => {
 
         return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
     };
+    const navigateToProfile = () => {
+        navigation.navigate('ProfileStack' as never);
+    };
 
-  
-    // const navigateToProfile = () => {
-    //     navigation.navigate('ProfileStack' as never); 
-    // };
-
-    const navigateToNotifications = () => {
+    const setNotifications = () => {
         
-        navigation.navigate('NotificationScreen' as never); 
+         setNotificationEnabled(prev => !prev);
+        Alert.alert(
+            notificationEnabled ? "Thông báo đã được bật " 
+            : "Đã tắt thông báo"
+            )
     };
 
     return (
@@ -58,17 +58,19 @@ const MainTabNavigator = () => {
                     <Image source={images.nbfc} style={styles.logo} />
                     <Text style={styles.headerText}>NBFC</Text>
                     <View style={styles.spacer} />
-                    <Pressable style={styles.iconCircle}>
+                    <Pressable onPress={navigateToProfile} style={styles.iconCircle}>
                         <MaterialCommunityIcons name="account-circle-outline" size={24} color={Colors.white} />
                     </Pressable>
-                    <Pressable onPress={navigateToNotifications} style={styles.iconCircle}>
-                        <MaterialCommunityIcons name="bell-outline" size={24} color={Colors.white} />
+                    <Pressable onPress={setNotifications} style={styles.iconCircle}>
+                        <MaterialCommunityIcons
+                            name={notificationEnabled ? 'bell' : 'bell-outline'}
+                            size={24}
+                            color={notificationEnabled ? Colors.gradientOrange : Colors.white}
+                        />
                     </Pressable>
                 </View>
             </SafeAreaView>
 
-
-            {/*BOTTOM TAB NAVIGATOR*/}
             <Tab.Navigator
                 initialRouteName="home"
                 screenOptions={({ route }) => ({

@@ -8,6 +8,7 @@ export type RootStackParamList = {
     AuthStack: { screen?: keyof AuthStackParamList; params?: any };
     MainTabs: undefined;
     Splash: undefined;
+    Profile:undefined;
 }
 
 export type RootStackScreensProps<T extends keyof RootStackParamList> = 
@@ -26,7 +27,7 @@ export type AuthStackScreensProps<T extends keyof AuthStackParamList> =
     NativeStackScreenProps<AuthStackParamList, T>;
 
 
-// MAIN TAB (Custom tab navigator)
+// MAIN TAB 
 export type MainTabParamList = {
     news: undefined;
     shop: undefined;
@@ -41,7 +42,11 @@ export type MainTabParamList = {
 export type MainTabScreensProps<T extends keyof MainTabParamList> = 
     BottomTabScreenProps<MainTabParamList, T>;
 
-
+// PROFILE STACK
+export type ProfileStackParamList = {
+    Profile: undefined;
+    Profile2: undefined;
+}
 // HOME STACK
 export type HomeStackParamList = {
     Home: undefined;

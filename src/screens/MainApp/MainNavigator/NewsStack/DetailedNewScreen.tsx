@@ -45,7 +45,7 @@ const DetailedNewsScreen = () => {
   if (!newsDetail) {
     return (
       <View style={styles.center}>
-        <Text>Không tìm thấy bài viết.</Text>
+        <Text>Không tìm thấy bài viết</Text>
       </View>
     );
   }
