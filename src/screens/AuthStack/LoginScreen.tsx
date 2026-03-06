@@ -105,7 +105,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
                    <Buttons.Button2
                     text="Đăng nhập"
                     color={Colors.white}
-                    backgroundColor={Colors.black}
+                    backgroundColor={Colors.maroon}
                     onPress={handleLogin}
                   />
                 </View>
@@ -113,7 +113,7 @@ const LoginScreen: React.FC<AuthStackScreensProps<'Login'>> = ({ navigation }) =
                   <Buttons.Button2
                     text="Đăng ký"
                     color={Colors.white}
-                    backgroundColor={Colors.maroon} 
+                    backgroundColor={Colors.black} 
                     onPress={handleRegister}
                   />
                 </View>

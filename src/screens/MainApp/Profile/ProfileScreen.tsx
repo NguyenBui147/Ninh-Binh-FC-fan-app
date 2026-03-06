@@ -1,14 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Pressable, Alert, ScrollView, Dimensions, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  Pressable, 
+  Alert, 
+  ScrollView, 
+  Dimensions, 
+  TouchableOpacity, 
+  ActivityIndicator 
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+
+// Import hệ thống định danh và style của dự án
 import Colors from '../../../assets/colors/colors';
 import { resetRoot } from '../../../navigation/NavigationService';
-
-// Import Hook lấy user
 import { useAuth } from '../../../hooks/useAuth';
+import { images } from '../../../assets';
 
 const { width } = Dimensions.get('window');
 
@@ -16,10 +28,10 @@ const ProfileScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
 
-  const handleLogout = () => {
+const handleLogout = () => {
     Alert.alert(
       "Đăng xuất",
-      "Bạn có chắc chắn muốn đăng xuất khỏi ứng dụng?",
+      "Bạn có chắc chắn muốn đăng xuất khỏi ứng dụng Ninh Bình FC?",
       [
         { text: "Hủy", style: "cancel" },
         {
@@ -27,8 +39,7 @@ const ProfileScreen = () => {
           style: 'destructive',
           onPress: async () => {
             try {
-              await auth().signOut();
-              resetRoot('AuthStack');
+              await auth().signOut();           
             } catch (error) {
               console.error("Lỗi đăng xuất:", error);
               Alert.alert("Lỗi", "Không thể đăng xuất lúc này. Vui lòng thử lại!");
@@ -38,42 +49,46 @@ const ProfileScreen = () => {
       ]
     );
   };
-
+  // Trạng thái chờ khi Firebase đang lấy dữ liệu User
   if (!user) {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
         <ActivityIndicator size="large" color={Colors.primaryRed} />
-        <Text style={{ marginTop: 10 }}>Đang tải thông tin...</Text>
+        <Text style={{ marginTop: 10, color: '#666' }}>Đang tải thông tin...</Text>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        contentContainerStyle={{ paddingBottom: 40 }} 
+        showsVerticalScrollIndicator={false}
+      >
 
         {/* --- DYNAMIC HEADER --- */}
         <View style={styles.header}>
-          <Image
-            source={{ uri: 'https://images.unsplash.com/photo-1518605368461-1e1296223280?q=80&w=2070&auto=format&fit=crop' }}
-            style={styles.coverImage}
-          />
-          <View style={styles.overlay} />
           <SafeAreaView style={styles.safeHeaderArea}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-              <MaterialCommunityIcons name="arrow-left" size={24} color="#fff" />
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()} 
+              style={styles.backButton}
+            >
+            <MaterialCommunityIcons name="arrow-left" size={24} color="#fff" />
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>Hồ sơ của tôi</Text>
-            <View style={{ width: 40 }} />
+            <Text style={styles.headerTitle}>HỒ SƠ CỦA TÔI</Text>
+            <View style={{ width: 40 }} /> 
           </SafeAreaView>
         </View>
 
-        {/* --- PROFILE INFO --- */}
+        {/* --- PROFILE INFO SECTION --- */}
         <View style={styles.profileSection}>
           <View style={styles.avatarContainer}>
             <Image
-              source={{ uri: user.photoURL || `https://ui-avatars.com/api/?background=random&name=${user.email}` }}
+              source={ 
+                user.photoURL ? { uri: user.photoURL } : images.nbfc
+              }
               style={styles.avatar}
+              resizeMode="cover"
             />
             <View style={styles.onlineBadge} />
           </View>
@@ -88,12 +103,12 @@ const ProfileScreen = () => {
             </View>
             <View style={styles.infoBadge}>
               <MaterialCommunityIcons name="map-marker-outline" size={16} color="#666" />
-              <Text style={styles.infoText}>Hà Nội, VN</Text>
+              <Text style={styles.infoText}>Ninh Bình, VN</Text>
             </View>
           </View>
         </View>
 
-        {/* --- KÝ SỐ / STATS --- */}
+        {/* --- USER STATISTICS (Dữ liệu mẫu cho đồ án) --- */}
         <View style={styles.statsContainer}>
           <View style={styles.statBox}>
             <Text style={styles.statNumber}>12</Text>
@@ -111,7 +126,7 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        {/* --- MENU TƯƠNG TÁC ĐƯỢC --- */}
+        {/* --- INTERACTIVE MENU --- */}
         <View style={styles.menuWrapper}>
           <Text style={styles.sectionTitle}>Tài khoản</Text>
           <View style={styles.cardSection}>
@@ -153,7 +168,7 @@ const ProfileScreen = () => {
           </View>
         </View>
 
-        {/* --- LOGOUT BUTTON AT BOTTOM --- */}
+        {/* --- LOGOUT BUTTON --- */}
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <MaterialCommunityIcons name="logout" size={22} color="#fff" />
           <Text style={styles.logoutText}>ĐĂNG XUẤT</Text>
@@ -164,7 +179,7 @@ const ProfileScreen = () => {
   );
 };
 
-// --- COMPONENT MENU CON ---
+// --- SUB-COMPONENT: MENU ITEM ---
 interface MenuItemProps {
   icon: string;
   text: string;
@@ -175,7 +190,14 @@ interface MenuItemProps {
 }
 
 const MenuItem = ({ icon, text, onPress, color = '#333', hideArrow = false, hideBorder = false }: MenuItemProps) => (
-  <Pressable style={[styles.menuItem, !hideBorder && styles.menuItemBorder]} onPress={onPress}>
+  <Pressable 
+    style={({ pressed }) => [
+      styles.menuItem, 
+      !hideBorder && styles.menuItemBorder,
+      { backgroundColor: pressed ? '#f9f9f9' : 'transparent' }
+    ]} 
+    onPress={onPress}
+  >
     <View style={styles.menuIconBg}>
       <MaterialCommunityIcons name={icon} size={22} color={Colors.maroon || '#721c24'} />
     </View>
@@ -191,42 +213,39 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F7FA'
   },
   header: {
-    height: 220,
-    width: width,
-    position: 'relative'
+  backgroundColor: Colors.primaryRed || '#d32f2f', // Màu đỏ chủ đạo
+  height: 180, // Giảm chiều cao xuống một chút cho cân đối
+  width: width,
   },
-  coverImage: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute'
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.2)', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.35)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   safeHeaderArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 15,
-    paddingTop: 10,
+    marginTop: 10,
   },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.25)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   headerTitle: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+   color: '#fff',
+  fontSize: 18,
+  fontWeight: 'bold',
+  letterSpacing: 1,
   },
   profileSection: {
     alignItems: 'center',
-    marginTop: -60,
+    marginTop: -55,
     paddingHorizontal: 20,
   },
   avatarContainer: {
@@ -234,18 +253,18 @@ const styles = StyleSheet.create({
     padding: 4,
     backgroundColor: '#fff',
     borderRadius: 60,
-    elevation: 8,
+    elevation: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    marginBottom: 15,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    marginBottom: 12,
   },
   avatar: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#eee'
+    backgroundColor: '#f0f0f0'
   },
   onlineBadge: {
     position: 'absolute',
@@ -259,35 +278,36 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
   userName: {
-    fontSize: 24,
-    fontWeight: '800',
+    fontSize: 22,
+    fontWeight: 'bold',
     color: '#1a1a1a',
     marginBottom: 4
   },
   userEmail: {
-    fontSize: 15,
-    color: '#666',
-    fontWeight: '500',
-    marginBottom: 12
+    fontSize: 14,
+    color: '#777',
+    marginBottom: 15
   },
   personalInfoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 10,
   },
   infoBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EAECEF',
+    backgroundColor: '#fff',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#eee'
   },
   infoText: {
     marginLeft: 6,
-    fontSize: 13,
-    color: '#444',
-    fontWeight: '600'
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '500'
   },
   statsContainer: {
     flexDirection: 'row',
@@ -295,102 +315,92 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 25,
     borderRadius: 16,
-    paddingVertical: 18,
-    elevation: 4,
+    paddingVertical: 20,
+    elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    justifyContent: 'space-around',
   },
   statBox: {
     alignItems: 'center',
     flex: 1,
   },
   statNumber: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: Colors.maroon || '#721c24',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   statLabel: {
-    fontSize: 12,
-    color: '#888',
-    fontWeight: '500'
+    fontSize: 11,
+    color: '#999',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5
   },
   statDivider: {
     width: 1,
-    height: 40,
-    backgroundColor: '#E5E5E5'
+    height: 35,
+    backgroundColor: '#f0f0f0'
   },
   menuWrapper: {
-    marginTop: 25,
+    marginTop: 20,
     paddingHorizontal: 20
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 12,
-    marginTop: 10,
+    color: '#333',
+    marginBottom: 10,
+    marginLeft: 5,
   },
   cardSection: {
     backgroundColor: '#fff',
     borderRadius: 16,
     paddingHorizontal: 15,
-    marginBottom: 10,
+    marginBottom: 15,
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 15,
   },
   menuItemBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0'
+    borderBottomColor: '#f5f5f5'
   },
   menuIconBg: {
-    width: 38,
-    height: 38,
+    width: 36,
+    height: 36,
     borderRadius: 10,
-    backgroundColor: 'rgba(114, 28, 36, 0.08)',
+    backgroundColor: 'rgba(114, 28, 36, 0.05)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15
   },
   menuText: {
     flex: 1,
-    fontSize: 15,
-    fontWeight: '600'
+    fontSize: 14,
+    fontWeight: '500'
   },
   logoutButton: {
     flexDirection: 'row',
     backgroundColor: Colors.primaryRed || '#d32f2f',
     marginHorizontal: 20,
-    marginTop: 35,
-    marginBottom: 20,
+    marginTop: 20,
     paddingVertical: 16,
-    borderRadius: 14,
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 4,
-    shadowColor: Colors.primaryRed || '#d32f2f',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
+    elevation: 5,
   },
   logoutText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     marginLeft: 10,
-    letterSpacing: 0.5,
   }
 });
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Image,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Image, Dimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { getFirestore } from '@react-native-firebase/firestore';
@@ -7,19 +7,20 @@ import { NewsStackParamList } from '../../../../navigation/NavigationTypes';
 import { NewsItem } from '../../../../hooks/useNews';
 import Colors from '../../../../assets/colors/colors';
 import { Footers } from '../../../../components';
+import NewsComments from '../../../../components/NewsComments';
 
 const screenWidth = Dimensions.get('window').width;
 
 const DetailedNewsScreen = () => {
   const route = useRoute<RouteProp<NewsStackParamList, 'DetailedNews'>>();
-  const { id } = route.params; 
+  const { id } = route.params;
   const [newsDetail, setNewsDetail] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const doc = await getFirestore().collection('news').doc(id).get() ;
-        
+        const doc = await getFirestore().collection('news').doc(id).get();
+
         if (doc) {
           setNewsDetail({ id: doc.id, ...doc.data() } as NewsItem);
         } else {
@@ -51,8 +52,8 @@ const DetailedNewsScreen = () => {
   }
 
 
-  const date = newsDetail.publishedAt?.toDate 
-    ? newsDetail.publishedAt.toDate().toLocaleDateString('vi-VN') 
+  const date = newsDetail.publishedAt?.toDate
+    ? newsDetail.publishedAt.toDate().toLocaleDateString('vi-VN')
     : '';
 
   return (
@@ -65,14 +66,14 @@ const DetailedNewsScreen = () => {
           <Text style={styles.source}>{newsDetail.source || 'CLB Ninh Bình'}</Text>
         </View>
         <RenderHTML
-          contentWidth={screenWidth - 40} 
+          contentWidth={screenWidth - 40}
           source={{ html: newsDetail.content || '<p>Nội dung đang cập nhật...</p>' }}
           tagsStyles={{
-            body: { 
-              whiteSpace: 'normal', 
-              color: Colors.black 
+            body: {
+              whiteSpace: 'normal',
+              color: Colors.black
             },
-            p: { 
+            p: {
               color: Colors.black,
               fontSize: 16,
               lineHeight: 24,
@@ -86,8 +87,9 @@ const DetailedNewsScreen = () => {
           enableExperimentalBRCollapsing={true}
           enableExperimentalMarginCollapsing={true}
         />
+        <NewsComments newsId={newsDetail.id} />
       </View>
-      <Footers.Footer1/>
+      <Footers.Footer1 />
     </ScrollView>
   );
 };
