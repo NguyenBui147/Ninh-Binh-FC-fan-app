@@ -1,17 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, StyleSheet, Image ,Pressable, Alert} from 'react-native';
+import { View, StyleSheet, Image, Pressable, Alert } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import HomeStack from './Screen Stacks/HomeStack'; 
-import NewsStack from './Screen Stacks/NewsStack'; 
+import HomeStack from './Screen Stacks/HomeStack';
+import NewsStack from './Screen Stacks/NewsStack';
 import ShopStack from './Screen Stacks/ShopStack';
 import ScheduleStack from './Screen Stacks/ScheduleStack';
 import PlayerStack from './Screen Stacks/PlayerStack';
 import Colors from '../assets/colors/colors';
 import { images } from '../assets';
-import { MainTabParamList } from './NavigationTypes'; 
+import { MainTabParamList } from './NavigationTypes';
 import { Text } from 'react-native-gesture-handler';
 
 
@@ -39,20 +39,20 @@ const MainTabNavigator = () => {
         return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
     };
     const navigateToProfile = () => {
-        navigation.navigate('ProfileStack' as never);
+        navigation.navigate('Profile' as never);
     };
 
     const setNotifications = () => {
-        
-         setNotificationEnabled(prev => !prev);
+
+        setNotificationEnabled(prev => !prev);
         Alert.alert(
-            notificationEnabled ? "Thông báo đã được bật " 
-            : "Đã tắt thông báo"
-            )
+            notificationEnabled ? "Thông báo đã được bật "
+                : "Đã tắt thông báo"
+        )
     };
 
     return (
-        <View style={styles.container}> 
+        <View style={styles.container}>
             <SafeAreaView style={styles.appBarContainer}  >
                 <View style={styles.appBar}>
                     <Image source={images.nbfc} style={styles.logo} />
@@ -74,7 +74,7 @@ const MainTabNavigator = () => {
             <Tab.Navigator
                 initialRouteName="home"
                 screenOptions={({ route }) => ({
-                    headerShown: false, 
+                    headerShown: false,
                     tabBarActiveTintColor: Colors.maroon,
                     tabBarInactiveTintColor: Colors.gray,
                     tabBarStyle: styles.tabBarStyle,
@@ -83,10 +83,10 @@ const MainTabNavigator = () => {
                 })}
             >
                 {routesConfig.map((route) => (
-                    <Tab.Screen 
+                    <Tab.Screen
                         key={route.key}
                         name={route.key as keyof MainTabParamList}
-                        component={route.component} 
+                        component={route.component}
                         options={{ tabBarLabel: route.title }}
                     />
                 ))}
@@ -96,12 +96,12 @@ const MainTabNavigator = () => {
 };
 
 const styles = StyleSheet.create({
-    container: { 
-        flex: 1, 
-        backgroundColor: Colors.gray1 
+    container: {
+        flex: 1,
+        backgroundColor: Colors.gray1
     },
     appBarContainer: {
-        backgroundColor: Colors.maroon, 
+        backgroundColor: Colors.maroon,
     },
     appBar: {
         flexDirection: 'row',
@@ -129,17 +129,17 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: 10,
     },
-    headerText:{
-        fontSize:30,
-        fontWeight:800,
-        color:Colors.gradientOrange,
+    headerText: {
+        fontSize: 30,
+        fontWeight: 800,
+        color: Colors.gradientOrange,
         elevation: 3,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 5,
-        
+
     },
-  
+
     tabBarStyle: {
         backgroundColor: Colors.darkNavy,
         borderTopWidth: 0,

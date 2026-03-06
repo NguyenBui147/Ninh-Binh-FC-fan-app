@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   Pressable,
+  TouchableOpacity,
   StyleSheet,
   Dimensions,
   ActivityIndicator,
@@ -17,6 +18,7 @@ import { useCollection } from '../../../../hooks/useCollection';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from '../../../../assets/colors/colors';
 import { ShopStackParamList } from '../../../../navigation/NavigationTypes';
+import { useCart } from '../../../../context/CartContext';
 
 const { width } = Dimensions.get('window');
 
@@ -35,6 +37,7 @@ const CATEGORY = ['Tất cả', 'Quần áo', 'Phụ kiện', 'Giày đá bóng'
 
 const ShopHomeScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ShopStackParamList>>();
+  const { totalItems } = useCart();
   const { data: products, loading, error } = useCollection<Product>('products');
   const [selectedCategory, setSelectedCategory] = useState('Tất cả');
   const [searchText, setSearchText] = useState('');
@@ -47,7 +50,7 @@ const ShopHomeScreen = () => {
       const matchSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
       return matchCategory && matchSearch;
     });
-    }, [products, selectedCategory, searchText]);
+  }, [products, selectedCategory, searchText]);
 
   const renderProduct = ({ item }: { item: Product }) => (
     <Pressable
@@ -92,9 +95,22 @@ const ShopHomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Text style={styles.bigTitle}>Ninh Binh FC Official Store</Text>
+        <View style={styles.headerTitleRow}>
+          <Text style={styles.bigTitle}>Ninh Binh FC Official Store</Text>
+          <TouchableOpacity
+            style={styles.cartIconWrapper}
+            onPress={() => navigation.navigate('Cart' as never)}
+          >
+            <MaterialCommunityIcons name="cart-outline" size={28} color="#000" />
+            {totalItems > 0 && (
+              <View style={styles.cartBadge}>
+                <Text style={styles.cartBadgeText}>{totalItems > 99 ? '99+' : totalItems}</Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
         <View style={styles.searchContainer}>
-          <MaterialCommunityIcons name="magnify" size={24} 
+          <MaterialCommunityIcons name="magnify" size={24}
             color={Colors.black} style={{ marginRight: 10 }} />
           <TextInput
             placeholder="Tìm kiếm sản phẩm..."
@@ -148,7 +164,22 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.white },
   centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   headerContainer: { paddingHorizontal: 20, paddingTop: 10, marginBottom: 15 },
-  bigTitle: { fontSize: 28, fontWeight: 'bold', color: '#000', marginBottom: 15, textAlign: 'center' },
+  headerTitleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15 },
+  bigTitle: { fontSize: 24, fontWeight: 'bold', color: '#000', flex: 1 },
+  cartIconWrapper: { position: 'relative', padding: 5 },
+  cartBadge: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: Colors.primaryRed || '#d32f2f',
+    borderRadius: 10,
+    minWidth: 18,
+    height: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+  },
+  cartBadgeText: { color: 'white', fontSize: 10, fontWeight: 'bold' },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',

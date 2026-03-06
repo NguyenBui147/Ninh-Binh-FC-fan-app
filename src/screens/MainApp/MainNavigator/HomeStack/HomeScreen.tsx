@@ -1,4 +1,4 @@
-import { StyleSheet, View, Modal } from 'react-native' 
+import { StyleSheet, View, Modal } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react' // 2. Thêm useState
 import { Button, Text, IconButton } from 'react-native-paper' // Thêm IconButton cho đẹp
@@ -10,16 +10,18 @@ import { Board } from '../../../../components';
 import { Footers } from '../../../../components';
 import { Modals } from '../ModalStack';
 
-import LiveChat from '../../../../components/LiveChat'; 
+import LiveChat from '../../../../components/LiveChat';
+import { useLiveScore } from '../../../../hooks/useLiveScore';
 
 const HomeScreen: React.FC<HomeStackScreensProps<"Home">> = () => {
   const [isChatVisible, setChatVisible] = useState(false);
+  const { match } = useLiveScore();
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1, backgroundColor: Colors.white }}>
         <Sliders.BannerSlider />
-        
+
         <View style={styles.container}>
           <View style={styles.sectionContainer}>
             <Sliders.CardSlider />
@@ -33,8 +35,8 @@ const HomeScreen: React.FC<HomeStackScreensProps<"Home">> = () => {
             <Sliders.VideoSlider />
           </View>
           <View style={{ marginTop: 20 }}>
-            <Button 
-              mode="contained" 
+            <Button
+              mode="contained"
               icon="chat-processing"
               buttonColor={Colors.primaryColor || '#d32f2f'}
               textColor="white"
@@ -46,31 +48,31 @@ const HomeScreen: React.FC<HomeStackScreensProps<"Home">> = () => {
           </View>
           <View style={{ height: 50 }}></View>
         </View>
-        
+
         <Footers.Footer1 />
       </ScrollView>
       <Modal
         animationType="slide"
         transparent={false}
         visible={isChatVisible}
-        onRequestClose={() => setChatVisible(false)} 
-        presentationStyle="pageSheet" 
+        onRequestClose={() => setChatVisible(false)}
+        presentationStyle="pageSheet"
       >
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
 
-            <View style={styles.chatHeader}>
-                <IconButton 
-                    icon="close" 
-                    size={24} 
-                    onPress={() => setChatVisible(false)} 
-                />
-                <Text style={styles.chatTitle}>Cộng đồng Fan Ninh Bình</Text>
-                <View style={{ width: 40 }} /> 
-            </View>
+          <View style={styles.chatHeader}>
+            <IconButton
+              icon="close"
+              size={24}
+              onPress={() => setChatVisible(false)}
+            />
+            <Text style={styles.chatTitle}>{match ? `Chat: ${match.homeTeam} vs ${match.awayTeam}` : 'Cộng đồng Fan Ninh Bình'}</Text>
+            <View style={{ width: 40 }} />
+          </View>
 
-            <View style={{ flex: 1 }}>
-                <LiveChat matchId="community-lobby" /> 
-            </View>
+          <View style={{ flex: 1 }}>
+            <LiveChat matchId={match?.id || "community-lobby"} />
+          </View>
         </SafeAreaView>
       </Modal>
 

@@ -2,16 +2,26 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+    image: string;
+    description?: string;
+    sizes?: string[];
+    rating?: number;
+}
 
 // ROOT STACK
 export type RootStackParamList = {
     AuthStack: { screen?: keyof AuthStackParamList; params?: any };
     MainTabs: undefined;
     Splash: undefined;
-    Profile:undefined;
+    Profile: undefined;
 }
 
-export type RootStackScreensProps<T extends keyof RootStackParamList> = 
+export type RootStackScreensProps<T extends keyof RootStackParamList> =
     NativeStackScreenProps<RootStackParamList, T>;
 
 
@@ -23,7 +33,7 @@ export type AuthStackParamList = {
     ForgotPassword: undefined;
 }
 
-export type AuthStackScreensProps<T extends keyof AuthStackParamList> = 
+export type AuthStackScreensProps<T extends keyof AuthStackParamList> =
     NativeStackScreenProps<AuthStackParamList, T>;
 
 
@@ -39,7 +49,7 @@ export type MainTabParamList = {
 
 }
 
-export type MainTabScreensProps<T extends keyof MainTabParamList> = 
+export type MainTabScreensProps<T extends keyof MainTabParamList> =
     BottomTabScreenProps<MainTabParamList, T>;
 
 // PROFILE STACK
@@ -53,41 +63,42 @@ export type HomeStackParamList = {
     LiveChat: undefined;
 }
 
-export type HomeStackScreensProps<T extends keyof HomeStackParamList> = 
+export type HomeStackScreensProps<T extends keyof HomeStackParamList> =
     NativeStackScreenProps<HomeStackParamList, T>;
 
 
 // NEWS STACK
 export type NewsStackParamList = {
     News: undefined;
-    DetailedNews:{id : string} ;
+    DetailedNews: { id: string };
 }
 
-export type NewsStackScreensProps<T extends keyof NewsStackParamList> = 
+export type NewsStackScreensProps<T extends keyof NewsStackParamList> =
     NativeStackScreenProps<NewsStackParamList, T>;
 
 
 // SHOP STACK
 export type ShopStackParamList = {
     Products: undefined;
-    DetailedProducts: {products: Product};
+    DetailedProducts: { products: Product };
     Tickets: undefined;
     DetailedTickets: undefined;
     CheckOut: undefined;
 }
 
-export type ShopStackScreensProps<T extends keyof ShopStackParamList> = 
+export type ShopStackScreensProps<T extends keyof ShopStackParamList> =
     NativeStackScreenProps<ShopStackParamList, T>;
 
 export type ProductsStackParamList = {
     Products: undefined;
-    DetailedProducts: {products: Product};
+    DetailedProducts: { products: Product };
+    Cart: undefined;
     Tickets: undefined;
     DetailedTickets: undefined;
     CheckOut: undefined;
 }
 
-export type ProductsStackScreensProps<T extends keyof ProductsStackParamList> = 
+export type ProductsStackScreensProps<T extends keyof ProductsStackParamList> =
     NativeStackScreenProps<ProductsStackParamList, T>;
 
 export type TicketsStackParamList = {
@@ -98,7 +109,7 @@ export type TicketsStackParamList = {
     CheckOut: undefined;
 }
 
-export type TicketsStackScreensProps<T extends keyof TicketsStackParamList> = 
+export type TicketsStackScreensProps<T extends keyof TicketsStackParamList> =
     NativeStackScreenProps<TicketsStackParamList, T>;
 
 // SCHEDULE STACK
@@ -107,17 +118,17 @@ export type ScheduleStackParamList = {
     LeaderBoard: undefined;
 }
 
-export type ScheduleStackScreensProps<T extends keyof ScheduleStackParamList> = 
+export type ScheduleStackScreensProps<T extends keyof ScheduleStackParamList> =
     NativeStackScreenProps<ScheduleStackParamList, T>;
 
 
 // Player STACK
 export type PlayerStackParamList = {
     Player: undefined;
-    DetailedPlayer:undefined;
+    DetailedPlayer: undefined;
 }
 
-export type PlayerStackScreensProps<T extends keyof PlayerStackParamList> = 
+export type PlayerStackScreensProps<T extends keyof PlayerStackParamList> =
     NativeStackScreenProps<PlayerStackParamList, T>;
 
 
@@ -126,7 +137,7 @@ export type ModalStackParamList = {
     Modal: undefined;
 }
 
-export type ModalStackScreensProps<T extends keyof ModalStackParamList> = 
+export type ModalStackScreensProps<T extends keyof ModalStackParamList> =
     NativeStackScreenProps<ModalStackParamList, T>;
 
 
@@ -136,7 +147,7 @@ export type SubStackParamList = {
     Default: undefined;
 }
 
-export type SubStackScreensProps<T extends keyof SubStackParamList> = 
+export type SubStackScreensProps<T extends keyof SubStackParamList> =
     NativeStackScreenProps<SubStackParamList, T>;
 
 
