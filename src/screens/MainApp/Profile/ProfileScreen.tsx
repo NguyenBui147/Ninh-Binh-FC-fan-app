@@ -16,9 +16,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
-// Import hệ thống định danh và style của dự án
 import Colors from '../../../assets/colors/colors';
-import { resetRoot } from '../../../navigation/NavigationService';
 import { useAuth } from '../../../hooks/useAuth';
 import { images } from '../../../assets';
 
@@ -28,7 +26,7 @@ const ProfileScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation();
 
-const handleLogout = () => {
+  const handleLogout = () => {
     Alert.alert(
       "Đăng xuất",
       "Bạn có chắc chắn muốn đăng xuất khỏi ứng dụng Ninh Bình FC?",
@@ -39,7 +37,7 @@ const handleLogout = () => {
           style: 'destructive',
           onPress: async () => {
             try {
-              await auth().signOut();           
+              await auth().signOut();
             } catch (error) {
               console.error("Lỗi đăng xuất:", error);
               Alert.alert("Lỗi", "Không thể đăng xuất lúc này. Vui lòng thử lại!");
@@ -49,7 +47,7 @@ const handleLogout = () => {
       ]
     );
   };
-  // Trạng thái chờ khi Firebase đang lấy dữ liệu User
+
   if (!user) {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
@@ -65,18 +63,14 @@ const handleLogout = () => {
         contentContainerStyle={{ paddingBottom: 40 }} 
         showsVerticalScrollIndicator={false}
       >
-
         {/* --- DYNAMIC HEADER --- */}
         <View style={styles.header}>
           <SafeAreaView style={styles.safeHeaderArea}>
-            <TouchableOpacity 
-              onPress={() => navigation.goBack()} 
-              style={styles.backButton}
-            >
-            <MaterialCommunityIcons name="arrow-left" size={24} color="#fff" />
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+              <MaterialCommunityIcons name="arrow-left" size={24} color="#fff" />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>HỒ SƠ CỦA TÔI</Text>
-            <View style={{ width: 40 }} /> 
+            <View style={{ width: 40 }} />
           </SafeAreaView>
         </View>
 
@@ -84,16 +78,14 @@ const handleLogout = () => {
         <View style={styles.profileSection}>
           <View style={styles.avatarContainer}>
             <Image
-              source={ 
-                user.photoURL ? { uri: user.photoURL } : images.nbfc
-              }
+              source={user.photoURL ? { uri: user.photoURL } : images.nbfc}
               style={styles.avatar}
               resizeMode="cover"
             />
             <View style={styles.onlineBadge} />
           </View>
 
-          <Text style={styles.userName}>{user.displayName || "Cổ động viên NBFC"}</Text>
+          <Text style={styles.userName}>{user.displayName }</Text>
           <Text style={styles.userEmail}>{user.email}</Text>
 
           <View style={styles.personalInfoRow}>
@@ -107,8 +99,6 @@ const handleLogout = () => {
             </View>
           </View>
         </View>
-
-        {/* --- USER STATISTICS (Dữ liệu mẫu cho đồ án) --- */}
         <View style={styles.statsContainer}>
           <View style={styles.statBox}>
             <Text style={styles.statNumber}>12</Text>
@@ -213,9 +203,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F7FA'
   },
   header: {
-  backgroundColor: Colors.primaryRed || '#d32f2f', // Màu đỏ chủ đạo
-  height: 180, // Giảm chiều cao xuống một chút cho cân đối
-  width: width,
+    backgroundColor: Colors.primaryRed || '#d32f2f',
+    height: 180,
+    width: width,
   },
   backButton: {
     width: 40,
@@ -225,10 +215,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
   safeHeaderArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -236,12 +222,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 10,
   },
-
   headerTitle: {
-   color: '#fff',
-  fontSize: 18,
-  fontWeight: 'bold',
-  letterSpacing: 1,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    letterSpacing: 1,
   },
   profileSection: {
     alignItems: 'center',

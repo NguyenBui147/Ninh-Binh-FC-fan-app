@@ -12,7 +12,7 @@ import { RootStackParamList } from '../navigation/NavigationTypes';
 import { Provider } from 'react-redux';
 import { useAuth } from '../hooks/useAuth';
 import SplashScreen from '../screens/SplashScreen';
-import ProfileScreen from '../screens/MainApp/Profile/ProfileScreen';
+import ProfileStack from './Screen Stacks/ProfileStack';
 import { navigationRef } from './NavigationService';
 import { StyleSheet } from 'react-native';
 
@@ -29,7 +29,7 @@ const RootNavigator = () => {
         ) : user ? (
           <>
             <RootStack.Screen name="MainTabs" component={MainTabNavigator} />
-            <RootStack.Screen name="Profile" component={ProfileScreen} />
+            <RootStack.Screen name="Profile" component={ProfileStack} />
           </>
         ) : (
           <RootStack.Screen name="AuthStack" component={AuthNavigator} />

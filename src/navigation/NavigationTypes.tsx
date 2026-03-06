@@ -56,6 +56,7 @@ export type MainTabScreensProps<T extends keyof MainTabParamList> =
 export type ProfileStackParamList = {
     Profile: undefined;
     Profile2: undefined;
+    EditProfileScreen: undefined;
 }
 // HOME STACK
 export type HomeStackParamList = {

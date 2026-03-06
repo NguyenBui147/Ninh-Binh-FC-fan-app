@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,166 +7,244 @@ import {
   Dimensions,
   ActivityIndicator,
 } from 'react-native';
-import { useLiveScore } from '../../hooks/useLiveScore';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useMatches } from '../../hooks/useMatches';
 import Colors from '../../assets/colors/colors';
+
 const { width } = Dimensions.get('window');
 
 const LiveScoreBoard = () => {
-    const {match,isLoading,displayTime} = useLiveScore();
+  const { match: matches, loading } = useMatches();
 
-    if(isLoading){
-        return(
-            <View style={styles.container}>
-                <ActivityIndicator size="small" color={Colors.primaryRed}/>
-            </View>
-        )
+  // Tìm trận đấu ưu tiên hiển thị: Live trước, Upcoming sau
+  const displayMatch = useMemo(() => {
+    if (!matches || matches.length === 0) return null;
+
+    // 1. Kiểm tra ưu tiên: Có trận nào đang diễn ra (live) không?
+    const liveMatches = matches.filter(m => m.status === 'LIVE');
+    if (liveMatches.length > 0) {
+      liveMatches.sort((a, b) => a.timeStamp - b.timeStamp);
+      return liveMatches[0];
     }
-    if (!match) {
+
+    // 2. Nếu không có trận live, lấy trận sắp diễn ra (upcoming) gần nhất
+    const upcomingMatches = matches.filter(m => m.status === 'UPCOMING');
+    if (upcomingMatches.length > 0) {
+      upcomingMatches.sort((a, b) => a.timeStamp - b.timeStamp);
+      return upcomingMatches[0];
+    }
+
+    return null;
+  }, [matches]);
+
+  if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.notiText}>Hiện không có trận đấu</Text>
+      <View style={[styles.container, styles.centerContent]}>
+        <ActivityIndicator size="large" color={Colors.primaryRed} />
       </View>
     );
   }
-    else{
-        return (
-        <View style={styles.container}>
-            <View style={styles.header}/>
-            <View style={styles.statusRow}>
-                {match.status === 'live' ? (
-                <View style={styles.liveBadge}>
-                    <View style={styles.dot} />
-                    <Text style={styles.liveText}>TRỰC TIẾP {displayTime}</Text>
-                </View>
-                ) : (
-                  <View style={styles.liveBadge}>
-                    <Text style={styles.statusText}>{displayTime}</Text>
-                  </View>
-                )}
-            </View>
 
-            <View style={styles.scoreRowContainer}>
-                <View style={styles.team}>
-                    <Image source={{uri: match.homeTeamLogo}} style={styles.logo}/>
-                    <Text style={styles.teamName} numberOfLines={2}>{match.homeTeam}</Text>
-                </View>
-                
-                <View style={styles.scoreContainer}>
-                    <Text style={styles.scoreText}>{match.score}</Text>
-                    <Text style={styles.teamName} numberOfLines={2}>{match.stadium}</Text>
-                </View>
+  if (!displayMatch) {
+    return (
+      <View style={[styles.container, styles.centerContent]}>
+        <MaterialCommunityIcons name="calendar-blank" size={32} color={Colors.gray} style={{ marginBottom: 10 }} />
+        <Text style={styles.notiText}>Chưa có lịch thi đấu hoặc trận live</Text>
+      </View>
+    );
+  }
 
-                <View style={styles.team}>
-                    <Image source={{uri: match.awayTeamLogo}} style={styles.logo}/>
-                    <Text style={styles.teamName} numberOfLines={2}>{match.awayTeam}</Text>
-                </View>
-            </View>
+  const match = displayMatch;
+  const isLive = match.status === 'live';
+
+  // Tuỳ thuộc vào API, đôi khi score là chuỗi "1 - 1" hoặc là số rời, tuỳ biến ở đây:
+  const matchScore = match.score ? match.score : `${match.homeTeamScore ?? 0} - ${match.awayTeamScore ?? 0}`;
+
+  return (
+    <View style={styles.container}>
+      {/* Thanh tiêu đề / Thời gian */}
+      <View style={styles.header}>
+        <View style={styles.upcomingBadge}>
+          {isLive ? (
+            <>
+              <View style={styles.liveDot} />
+              <Text style={styles.upcomingText}>TRỰC TIẾP</Text>
+            </>
+          ) : (
+            <>
+              <MaterialCommunityIcons name="clock-outline" size={14} color="#fff" style={{ marginRight: 4 }} />
+              <Text style={styles.upcomingText}>SẮP DIỄN RA</Text>
+            </>
+          )}
         </View>
-        )
-    }
+        <Text style={styles.timeText}>{match.timeStr}</Text>
+      </View>
+
+      {/* Thông tin đội bóng & Tỉ số/Tình trạng */}
+      <View style={styles.contentRow}>
+        {/* Đội nhà */}
+        <View style={styles.teamSection}>
+          <View style={styles.logoWrapper}>
+            <Image source={{ uri: match.homeTeamLogo }} style={styles.logo} />
+          </View>
+          <Text style={styles.teamName} numberOfLines={2}>{match.homeTeam}</Text>
+        </View>
+
+        {/* Khu vực giữa (VS / Tỉ số / Sân vận động) */}
+        <View style={styles.vsSection}>
+          {isLive ? (
+            <Text style={styles.scoreText}>{matchScore}</Text>
+          ) : (
+            <Text style={styles.vsText}>VS</Text>
+          )}
+          <View style={styles.stadiumBadge}>
+            
+            <Text style={styles.stadiumText} numberOfLines={1}> {match.stadium}</Text>
+          </View>
+        </View>
+
+        {/* Đội khách */}
+        <View style={styles.teamSection}>
+          <View style={styles.logoWrapper}>
+            <Image source={{ uri: match.awayTeamLogo }} style={styles.logo} />
+          </View>
+          <Text style={styles.teamName} numberOfLines={2}>{match.awayTeam}</Text>
+        </View>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 140, 
-    width: width*0.9,
-    alignContent: 'center',
-    backgroundColor: Colors.gray1,
-    borderRadius: 10,
-    overflow: 'hidden', 
-    elevation: 3,
+    height: 160,
+    width: width * 0.9,
+    backgroundColor: '#ffffff',
+    borderRadius: 16,
+    overflow: 'hidden',
+    elevation: 8,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    justifyContent: 'center',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    marginVertical: 10,
   },
-  header:{
-    width: '100%',
-    height:10,
-    backgroundColor:Colors.primaryRed,
-  },
-  loadingContainer: {
+  centerContent: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  statusRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  liveBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  dot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: Colors.primaryRed,
-    marginRight: 6,
-  },
-  liveText: {
-    color: Colors.primaryRed,
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  notiText:{
-    textAlign:'center',
-    fontSize: 20,
-    color: Colors.black,
-    fontWeight: '600',
-  },
-  statusText: {
-    fontSize: 10,
-    color: Colors.black,
-    fontWeight: '600',
-  },
-  scoreRowContainer: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingBottom: 10,
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: Colors.darkNavy || '#1a237e',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
-  team: {
+  upcomingBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.maroon || '#721c24',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  liveDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#fff',
+    marginRight: 6,
+  },
+  upcomingText: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  },
+  timeText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  notiText: {
+    fontSize: 16,
+    color: Colors.darkNavy || '#333',
+    fontWeight: '600',
+  },
+  contentRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  teamSection: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 5,
+  },
+  logoWrapper: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   logo: {
     width: 35,
     height: 35,
     resizeMode: 'contain',
   },
-  
   teamName: {
     textAlign: 'center',
-    fontSize: 12,
-    fontWeight: '600',
-    color: Colors.black,
-    width: '100%',
-    marginTop:10
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#1a1a1a',
+    lineHeight: 18,
   },
-
-  scoreContainer: {
+  vsSection: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
-
+  vsText: {
+    fontSize: 24,
+    fontWeight: '900',
+    fontStyle: 'italic',
+    color: Colors.gray || '#9e9e9e',
+    marginBottom: 5,
+  },
   scoreText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: Colors.darkNavy,
+    fontSize: 26,
+    fontWeight: '900',
+    color: Colors.maroon || '#721c24',
+    marginBottom: 5,
   },
+  stadiumBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f0f4f8',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 20,
+    maxWidth: '100%',
+  },
+  stadiumText: {
+    fontSize: 10,
+    color: Colors.darkNavy || '#1a237e',
+    fontWeight: '600',
+    flexShrink: 1,
+  }
 });
 
 export default LiveScoreBoard;

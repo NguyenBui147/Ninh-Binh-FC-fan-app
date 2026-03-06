@@ -19,7 +19,7 @@ const VideoPlayer = () => {
         <YoutubePlayer
           height={200}
           play={playing}
-          videoId={'BsDrkfYgKpg'} 
+          videoId={'MiJIODpKngw'} 
           onChangeState={onStateChange}
         />
       </View>
